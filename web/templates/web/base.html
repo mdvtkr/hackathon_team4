@@ -50,7 +50,33 @@
             border-right-width: 0.1px;
             border-right-style: solid;
             border-right-color: #747474;
+
         }
+        .jumbotron{
+            padding: 1rem 1rem;
+            margin: 1px 1px 1px 1px;
+            overflow: overlay;
+            max-height: 300px;
+        }
+        .btn-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container-right-column-sm{
+            padding-left: 0px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+        }
+        .table td{
+            padding: 0.1rem;
+            text-align: center;
+        }
+        .table th{
+            padding: 0.2rem;
+            text-align: center;
+        }
+
     </style>
 
   </head>
@@ -228,13 +254,163 @@
               </table>
             </div>
             <div class="col-md-3 col-sm-3 col-lg-3 box">
-                <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="container-right-column-sm">
+                    <p>Progress</p>
+                    <div class="progress">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="container-right-column-sm">
+                    <div class="jumbotron">
+<!--                      <h3 class="display-5">Trading Log</h3>-->
+                        <h4>Trading Log</h4>
+<!--                      <p class="lead">Log를 여기에 쌓겠습니다....</p>-->
+                        <p>현재 라운드의 거래 내역입니다.</p>
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th scope="col">Round</th>
+                              <th scope="col">Stock</th>
+                              <th scope="col">Purchase</th>
+                              <th scope="col">Sale</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="table-active">
+                              <th scope="row">1R</th>
+                              <td>SAMSUNG</td>
+                              <td>10</td>
+                              <td>0</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">1R</th>
+                              <td>Celltrion</td>
+                              <td>0</td>
+                              <td>4</td>
+                            </tr>
+                          <tr class="table-active">
+                              <th scope="row">1R</th>
+                              <td>SAMSUNG</td>
+                              <td>10</td>
+                              <td>0</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">1R</th>
+                              <td>Celltrion</td>
+                              <td>0</td>
+                              <td>4</td>
+                            </tr>
+                          <tr class="table-active">
+                              <th scope="row">1R</th>
+                              <td>SAMSUNG</td>
+                              <td>10</td>
+                              <td>0</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">1R</th>
+                              <td>Celltrion</td>
+                              <td>0</td>
+                              <td>4</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      <hr class="my-4">
+                      <p></p>
+
+                    </div>
+                </div>
+                <div class="container-right-column-sm">
+                    <div class="jumbotron">
+                        <h4>Return on Investment History</h4>
+                        <p>각 라운드 별 투자 수익률 현황입니다.</p>
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th scope="col">Round</th>
+                              <th scope="col">Profit</th>
+                              <th scope="col">Percentage</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="table-active">
+                              <th scope="row">1R</th>
+                              <td>100,000</td>
+                              <td>3.5%</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">2R</th>
+                              <td>100,000</td>
+                              <td>3.5%</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">3R</th>
+                              <td>100,000</td>
+                              <td>3.5%</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">4R</th>
+                              <td>100,000</td>
+                              <td>3.5%</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">5R</th>
+                              <td>100,000</td>
+                              <td>3.5%</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">6R</th>
+                              <td>100,000</td>
+                              <td>3.5%</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">7R</th>
+                              <td>100,000</td>
+                              <td>3.5%</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">8R</th>
+                              <td>100,000</td>
+                              <td>3.5%</td>
+                            </tr>
+                            <tr class="table-active">
+                              <th scope="row">9R</th>
+                              <td>100,000</td>
+                              <td>3.5%</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="container-right-column-sm">
+                    <div class="jumbotron btn-container">
+                            <a class="btn btn-danger btn-lg" data-toggle="modal" href="#aggregateModal" role="button">Next Round</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+<!-- Aggregate Modal -->
+  <div class="modal" id="aggregateModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Round Result</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>현재 라운드: 1Round</p>
+          <p>총 손익금액: ₩164,433,432 </p>
+          <p>수익률: 1212%</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <script src="{% static 'web/js/jquery.min.js' %}"></script>
