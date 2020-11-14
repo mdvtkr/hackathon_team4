@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from rest_framework_swagger.views import get_swagger_view
+import web.api
+
+router = routers.DefaultRouter()
+router.register('web',web.api.CurrentStockPriceViewSet)
 
 urlpatterns = [
     path('', include('web.urls')),
     path('admin/', admin.site.urls),
+    path('api/swagger', get_swagger_view(title='swagger')),
+    path('api/v1/', include((router.urls,'web'), namespace='api')),
 ]
