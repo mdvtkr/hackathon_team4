@@ -1,421 +1,721 @@
-<!doctype html>
+<!DOCTYPE html>
 {% load static %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <title>INTRO</title>
 
-    <link href="{% static 'web/bootstrap/bootstrap.css' %}" rel = "stylesheet" />
-    <link href="{% static 'web/_assets/css/custom.min.css' %}" rel = "stylesheet" />
+    <link href="{% static 'web/bootstrap/bootstrap.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'web/_assets/css/custom.min.css' %}"
+      rel="stylesheet"
+    />
 
+    <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <script>
+      var width = window.innerWidth / 2;
+      var width4 = width / 3;
+      var height = window.innerHeight;
+      var height4 = height / 6;
+      console.log("width: " + width4);
+      console.log("height: " + height4);
+
+      $(document).ready(function () {
+        $(".stock-price").css("height", height4);
+        $(".stock-price").css("width", width4);
+      });
+    </script>
 
     <style>
-        .fullscreen{
-            width:100%;
-            height:100%;
-            position:fixed;
-        }
-        .col-md-3{
-            height: 724px;
-        }
+      .fullscreen {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+      }
+      .col-md-3 {
+        height: 724px;
+      }
 
-        .col-sm-3{
-            height: 724px;
-        }
+      .col-sm-3 {
+        height: 724px;
+      }
 
-        .col-lg-3{
-            height: 724px;
-        }
+      .col-lg-3 {
+        height: 724px;
+      }
 
-        .col-md-6{
-            height: 724px;
-        }
+      .col-md-6 {
+        height: 724px;
+      }
 
-        .col-sm-6{
-            height: 724px;
-        }
+      .col-sm-6 {
+        height: 724px;
+      }
 
-        .col-lg-6{
-            height: 724px;
-        }
+      .col-lg-6 {
+        height: 724px;
+      }
 
-        .padding{
-            height: 10px;
-        }
+      .stock-price {
+        width: 0px;
+        height: 0px;
+      }
 
-        .box{
-            border-right-width: 0.1px;
-            border-right-style: solid;
-            border-right-color: #747474;
+      .padding {
+        height: 10px;
+      }
 
-        }
-        .jumbotron{
-            padding: 1rem 1rem;
-            margin: 1px 1px 1px 1px;
-            overflow: overlay;
-            max-height: 300px;
-        }
-        .btn-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container-right-column-sm{
-            padding-left: 0px;
-            padding-right: 10px;
-            padding-bottom: 10px;
-        }
-        .table td{
-            padding: 0.1rem;
-            text-align: center;
-        }
-        .table th{
-            padding: 0.2rem;
-            text-align: center;
-        }
+      .padding2 {
+        height: 20px;
+      }
 
+      .box {
+        border-right-width: 0.1px;
+        border-right-style: solid;
+        border-right-color: #747474;
+      }
+      .jumbotron {
+        padding: 1rem 1rem;
+        margin: 1px 1px 1px 1px;
+        overflow: overlay;
+        max-height: 300px;
+      }
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container-right-column-sm {
+        padding-left: 0px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+      }
+      .table td {
+        padding: 0.1rem;
+        text-align: center;
+      }
+      .table th {
+        padding: 0.2rem;
+        text-align: center;
+      }
+
+      .card-section {
+        position: relative;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      .bg-light {
+        margin: 10px;
+      }
+
+      h6 {
+        text-align: center;
+      }
+
+      table {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      table,
+      td {
+        text-align: center;
+        paiing: 0.3rem;
+      }
+      td {
+        font-size: 1px;
+      }
     </style>
-
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarColor03">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
     <div class="padding"></div>
 
     <div class="fullscreen">
-         <div class="row">
-            <div class="col-md-3 col-sm-3 col-lg-3 box">
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-lg-3 box"></div>
+        <div class="col-md-6 col-sm-6 col-lg-6 box">
+          <div class="jumbotron">오늘의 뉴스</div>
+          <div class="padding2"></div>
 
+          <div class="card-section">
+            <div class="container container1">
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="005930">
+                  <h6>SAMSUNG</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button type="button" class="btn btn-success">사기</button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-info">팔기</button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="000660">
+                  <h6>SK 하이닉스</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="068270">
+                  <h6>셀트리온</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="096530">
+                  <h6>씨젠</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-lg-6 box">
-            <table align="center">
-                <tr>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">SAMSUNG</h6>
-                              <span class="badge badge-warning">3000</span>
-                            <button type="button" class="btn btn-white btn-sm">Buy</button>
-                          </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-                          <div class="card-body">
-                            <h6 class="card-title">Info card title</h6>
-                            </div>
-                      </div>
-                  </td>
-                </tr>
+
+            <div class="container container2">
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="105560">
+                  <h6>KB 금융</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="055550">
+                  <h6>신한지주</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="009540">
+                  <h6>한국조선해양</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="133750">
+                  <h6>메가엠디</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="container container3">
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="057030">
+                  <h6>YBM넷</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="035720">
+                  <h6>카카오</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="035420">
+                  <h6>네이버</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="035760">
+                  <h6>CJ ENM</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="container container4">
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="352820">
+                  <h6>빅히트</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="009830">
+                  <h6>한화솔루션</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>
+                      </td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="011780">
+                  <h6>금호석유</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div
+                class="stock-price card bg-light mb-3"
+                style="max-width: 20rem"
+              >
+                <div class="card-body" id="011070">
+                  <h6>LG 이노텍</h6>
+                  <table>
+                    <tr>
+                      <td>현재가</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>가격변동</td>
+                      <td>2000</td>
+                    </tr>
+                    <tr>
+                      <td>현재가</td>
+                      <td>주</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3 box">
+          <div class="container-right-column-sm">
+            <p>Progress</p>
+            <div class="progress">
+              <div
+                class="progress-bar bg-danger"
+                role="progressbar"
+                style="width: 25%"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </div>
+          <div class="container-right-column-sm">
+            <div class="jumbotron">
+              <!--                      <h3 class="display-5">Trading Log</h3>-->
+              <h4>Trading Log</h4>
+              <!--                      <p class="lead">Log를 여기에 쌓겠습니다....</p>-->
+              <p>현재 라운드의 거래 내역입니다.</p>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Round</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Purchase</th>
+                    <th scope="col">Sale</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-active">
+                    <th scope="row">1R</th>
+                    <td>SAMSUNG</td>
+                    <td>10</td>
+                    <td>0</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">1R</th>
+                    <td>Celltrion</td>
+                    <td>0</td>
+                    <td>4</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">1R</th>
+                    <td>SAMSUNG</td>
+                    <td>10</td>
+                    <td>0</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">1R</th>
+                    <td>Celltrion</td>
+                    <td>0</td>
+                    <td>4</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">1R</th>
+                    <td>SAMSUNG</td>
+                    <td>10</td>
+                    <td>0</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">1R</th>
+                    <td>Celltrion</td>
+                    <td>0</td>
+                    <td>4</td>
+                  </tr>
+                </tbody>
+              </table>
+              <hr class="my-4" />
+              <p></p>
+            </div>
+          </div>
+          <div class="container-right-column-sm">
+            <div class="jumbotron">
+              <h4>Return on Investment History</h4>
+              <p>각 라운드 별 투자 수익률 현황입니다.</p>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Round</th>
+                    <th scope="col">Profit</th>
+                    <th scope="col">Percentage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-active">
+                    <th scope="row">1R</th>
+                    <td>100,000</td>
+                    <td>3.5%</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">2R</th>
+                    <td>100,000</td>
+                    <td>3.5%</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">3R</th>
+                    <td>100,000</td>
+                    <td>3.5%</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">4R</th>
+                    <td>100,000</td>
+                    <td>3.5%</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">5R</th>
+                    <td>100,000</td>
+                    <td>3.5%</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">6R</th>
+                    <td>100,000</td>
+                    <td>3.5%</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">7R</th>
+                    <td>100,000</td>
+                    <td>3.5%</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">8R</th>
+                    <td>100,000</td>
+                    <td>3.5%</td>
+                  </tr>
+                  <tr class="table-active">
+                    <th scope="row">9R</th>
+                    <td>100,000</td>
+                    <td>3.5%</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
-            <div class="col-md-3 col-sm-3 col-lg-3 box">
-                <div class="container-right-column-sm">
-                    <p>Progress</p>
-                    <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="container-right-column-sm">
-                    <div class="jumbotron">
-<!--                      <h3 class="display-5">Trading Log</h3>-->
-                        <h4>Trading Log</h4>
-<!--                      <p class="lead">Log를 여기에 쌓겠습니다....</p>-->
-                        <p>현재 라운드의 거래 내역입니다.</p>
-                        <table class="table table-hover">
-                          <thead>
-                            <tr>
-                              <th scope="col">Round</th>
-                              <th scope="col">Stock</th>
-                              <th scope="col">Purchase</th>
-                              <th scope="col">Sale</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="table-active">
-                              <th scope="row">1R</th>
-                              <td>SAMSUNG</td>
-                              <td>10</td>
-                              <td>0</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">1R</th>
-                              <td>Celltrion</td>
-                              <td>0</td>
-                              <td>4</td>
-                            </tr>
-                          <tr class="table-active">
-                              <th scope="row">1R</th>
-                              <td>SAMSUNG</td>
-                              <td>10</td>
-                              <td>0</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">1R</th>
-                              <td>Celltrion</td>
-                              <td>0</td>
-                              <td>4</td>
-                            </tr>
-                          <tr class="table-active">
-                              <th scope="row">1R</th>
-                              <td>SAMSUNG</td>
-                              <td>10</td>
-                              <td>0</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">1R</th>
-                              <td>Celltrion</td>
-                              <td>0</td>
-                              <td>4</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      <hr class="my-4">
-                      <p></p>
-
-                    </div>
-                </div>
-                <div class="container-right-column-sm">
-                    <div class="jumbotron">
-                        <h4>Return on Investment History</h4>
-                        <p>각 라운드 별 투자 수익률 현황입니다.</p>
-                        <table class="table table-hover">
-                          <thead>
-                            <tr>
-                              <th scope="col">Round</th>
-                              <th scope="col">Profit</th>
-                              <th scope="col">Percentage</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="table-active">
-                              <th scope="row">1R</th>
-                              <td>100,000</td>
-                              <td>3.5%</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">2R</th>
-                              <td>100,000</td>
-                              <td>3.5%</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">3R</th>
-                              <td>100,000</td>
-                              <td>3.5%</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">4R</th>
-                              <td>100,000</td>
-                              <td>3.5%</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">5R</th>
-                              <td>100,000</td>
-                              <td>3.5%</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">6R</th>
-                              <td>100,000</td>
-                              <td>3.5%</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">7R</th>
-                              <td>100,000</td>
-                              <td>3.5%</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">8R</th>
-                              <td>100,000</td>
-                              <td>3.5%</td>
-                            </tr>
-                            <tr class="table-active">
-                              <th scope="row">9R</th>
-                              <td>100,000</td>
-                              <td>3.5%</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="container-right-column-sm">
-                    <div class="jumbotron btn-container">
-                            <a class="btn btn-danger btn-lg" data-toggle="modal" href="#aggregateModal" role="button">Next Round</a>
-                    </div>
-                </div>
+          </div>
+          <div class="container-right-column-sm">
+            <div class="jumbotron btn-container">
+              <a
+                class="btn btn-danger btn-lg"
+                data-toggle="modal"
+                href="#aggregateModal"
+                role="button"
+                >Next Round</a
+              >
             </div>
+          </div>
         </div>
-    </div>
-
-<!-- Aggregate Modal -->
-  <div class="modal" id="aggregateModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Round Result</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>현재 라운드: 1Round</p>
-          <p>총 손익금액: ₩164,433,432 </p>
-          <p>수익률: 1212%</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-success" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>
 
+    <!-- Aggregate Modal -->
+    <div class="modal" id="aggregateModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Round Result</h3>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>현재 라운드: 1Round</p>
+            <p>총 손익금액: ₩164,433,432</p>
+            <p>수익률: 1212%</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <script src="{% static 'web/js/jquery.min.js' %}"></script>
     <script src="{% static 'web/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'web/js/custom.js' %}"></script>
-
   </body>
 </html>
