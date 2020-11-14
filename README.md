@@ -2,3 +2,15 @@
 ---
 ## Theme
 https://bootswatch.com/sketchy/
+
+## 의존성 설치
+```
+pip install -r requirements.txt
+
+```
+
+## 의존성 추가
+```
+pip freeze > requirements.txt
+```
+
