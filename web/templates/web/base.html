@@ -96,6 +96,24 @@
         padding-right: 10px;
         padding-bottom: 10px;
       }
+
+      .table-card {
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        table-layout: fixed;
+        word-break: break-all;
+      }
+
+      .table-card, .td-card {
+        text-align: center;
+      }
+      .td-card {
+        font-size: 1px;
+        width: 60px;
+      }
+
+
       .table td {
         padding: 0.1rem;
         text-align: center;
@@ -121,19 +139,8 @@
         text-align: center;
       }
 
-      table {
-        margin-left: auto;
-        margin-right: auto;
-      }
 
-      table,
-      td {
-        text-align: center;
-        paiing: 0.3rem;
-      }
-      td {
-        font-size: 1px;
-      }
+
     </style>
   </head>
   <body>
@@ -150,28 +157,31 @@
             <div class="container container1">
               <div
                 class="stock-price card bg-light mb-3"
-                style="max-width: 20rem"
-              >
+                style="max-width: 20rem">
                 <div class="card-body" id="005930">
                   <h6>SAMSUNG</h6>
-                  <table>
+                  <table class="table-card">
                     <tr>
-                      <td>현재가</td>
-                      <td>2000</td>
+                      <td class="td-card">price</td>
+                      <td class="td-card">2000</td>
                     </tr>
                     <tr>
-                      <td>가격변동</td>
-                      <td>2000</td>
+                      <td class="td-card">가격변동</td>
+                      <td class="td-card">2000</td>
                     </tr>
                     <tr>
-                      <td>현재가</td>
-                      <td>주</td>
+                      <td class="td-card">
+                        <div class="form-group">
+                          <input class="form-control form-control-sm" type="text" placeholder="?" id="inputSmall">
+                        </div>
+                      </td>
+                      <td class="td-card">주</td>
                     </tr>
                     <tr>
-                      <td>
+                      <td class="td-card">
                         <button type="button" class="btn btn-success">사기</button>
                       </td>
-                      <td>
+                      <td class="td-card">
                         <button type="button" class="btn btn-info">팔기</button>
                       </td>
                     </tr>

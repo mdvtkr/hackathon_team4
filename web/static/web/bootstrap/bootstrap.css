@@ -2013,13 +2013,14 @@ pre code {
 
 .form-control {
   display: block;
-  width: 100%;
+  width: 50%;
   height: calc(1.5em + 0.75rem + 4px);
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  font-size: 6px;
   font-weight: 700;
   line-height: 1.5;
   color: #555;
+  align: center;
   background-color: #fff;
   background-clip: padding-box;
   border: 2px solid #333;
@@ -2143,10 +2144,13 @@ select.form-control:focus::-ms-value {
 
 .form-control-sm {
   height: calc(1.5em + 0.5rem + 4px);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
+  padding: 0.1rem 0.1rem;
+  font-size: 6px;
   line-height: 1.5;
   border-radius: 15px;
+  text-align: center;
+  position: relative;
+  left: 30%;
 }
 
 .form-control-lg {
@@ -2166,7 +2170,9 @@ textarea.form-control {
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 0.1rem;
+  text-align: center;
+  display: flex;
 }
 
 .form-text {
