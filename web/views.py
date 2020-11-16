@@ -2,16 +2,15 @@ from django.shortcuts import render
 from django.views import View
 from django.conf import settings
 from django.http import JsonResponse
-
 from .api import *
 from .models import *
-
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 import requests
 import datetime
+from .batch import *
 
 # Create your views here.
 def intro(request):
@@ -29,6 +28,8 @@ def stockList(request):
     return JsonResponse(koscomStockList())
 def stockPriceList(request):
     return JsonResponse(koscomStockPriceList(), safe=False)
+def currentStockRefresh(request):
+    return JsonResponse(currentStockBatch(), safe=False)
 
 @api_view(['GET', 'POST', 'DELETE', 'PUT'])
 def stockPrice(request):
