@@ -9,8 +9,8 @@ class currentStockPrice(models.Model):
 class newsData(models.Model):
     id = models.AutoField(primary_key=True)
     news_data = models.CharField(max_length=300)
-    stock_name = models.CharField(max_length=30)
-    current_price = models.IntegerField()
+    # stock_name = models.CharField(max_length=30)
+    # current_price = models.IntegerField()
     rate_005930 = models.IntegerField()
     rate_000660 = models.IntegerField()
     rate_068270 = models.IntegerField()
@@ -18,9 +18,7 @@ class newsData(models.Model):
     rate_105560 = models.IntegerField()
     rate_055550 = models.IntegerField()
     rate_009540 = models.IntegerField()
-    rate_133750 = models.IntegerField(
-
-    )
+    rate_133750 = models.IntegerField()
     rate_057030 = models.IntegerField()
     rate_035720 = models.IntegerField()
     rate_035420 = models.IntegerField()
