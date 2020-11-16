@@ -20,7 +20,7 @@ from rest_framework_swagger.views import get_swagger_view
 import web.api
 
 router = routers.DefaultRouter()
-router.register('web',web.api.CurrentStockPriceViewSet)
+router.register('stock_price',web.api.CurrentStockPriceViewSet)
 
 urlpatterns = [
     path('', include('web.urls')),

@@ -4,7 +4,7 @@ STOCK_CODE_LIST = ['005930','000660','068270','096530','105560','055550','009540
 
 
 getUrl = "http://localhost:8000/api/stock_price"
-postUrl = 'http://localhost:8000/api/v1/web/'
+postUrl = 'http://localhost:8000/api/v1/stock_price/'
 
 if __name__ == "__main__":
     res = requests.get(getUrl)
@@ -12,8 +12,13 @@ if __name__ == "__main__":
 
     for stock in stockList:
         cur = stock.get('result')
-        price = cur.get('hisLists')[0].get('opnprc')
+        stockPrice = cur.get('hisLists')[0].get('opnprc')
         stockCode = cur.get('isuSrtCd')
+        data = {'stock_code': stockCode, 'stock_price': stockPrice}
+        headers = {'Content-Type':'application/json','charset':'utf-8'}
+        res = requests.post(postUrl, data=data, headers=headers)
+        print(res.text)
+
 
     # for code in STOCK_CODE_LIST:
     #     res = requests.get(getUrl+code)
