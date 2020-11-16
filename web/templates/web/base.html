@@ -1166,7 +1166,7 @@
 
 <!--    16개의 주식에 대한 주가 정보 업데이트-->
     function updateCardBody(){
-      for(i in cards){
+      for(var i=0; i<16; i++){
         var code = json.responseJSON[i].stock_code
         document.getElementById(code).getElementByClassName("price").innerText= json.responseJSON[i].current_price
         console.log("code: " + code + " i: " + i);
