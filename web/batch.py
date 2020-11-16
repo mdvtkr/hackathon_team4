@@ -13,7 +13,7 @@ def currentStockBatch():
     resPrice = requests.get(getPriceUrl)
     resList = requests.get(getListUrl)
     stockPriceList = resPrice.json()#.decode('utf-8')
-    stockList = resList.json().get('isuLists')
+    stockList = resList.json()
     ret = []
     for stock in stockList:
         if stock.get('isuSrtCd') in STOCK_CODE_LIST:
