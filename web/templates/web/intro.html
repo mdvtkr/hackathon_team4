@@ -63,42 +63,20 @@
 <script>
     $('#save').click(function(){
         var valueById = $('#nickname').val();
+<!--        alert(valueById);-->
 
-        if(!($('#nickname').val().equals(""))){
-            $.ajax({
-                url : 'http://13.124.3.123:8080/api/v1/user_rank/',
-                type : 'POST',
-                dataType : 'json',
-                data : {
-                    'username' : valueById,
-                    'earning_rate' : 0,
-                },
-
-            });
-
-            alert("else문 성공");
-
-        } else{
-            alert("닉네임을 입력해주세요");
-        }
-
+        $.ajax({
+		url : 'http://13.124.3.123:8080/api/v1/user_rank/',
+		type : 'POST',
+		dataType : 'json',
+		data : {
+		    'username' : valueById,
+		    'earning_rate' : 0,
+		},
 
     });
 
-
-
-<!--  $('#save').click(function(){-->
-<!--    $.ajax({-->
-<!--		url : 'http://13.124.3.123:8080/api/v1/user_rank/',-->
-<!--		type : 'POST',-->
-<!--		dataType : 'json',-->
-<!--		data : {-->
-<!--		    'username': '{{ csrf_token }}',-->
-<!--		    'earning_rate' : 0,-->
-<!--		},-->
-
-<!--    });-->
-<!--});-->
+    });
 
 </script>
 

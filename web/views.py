@@ -16,6 +16,8 @@ from .batch import *
 # Create your views here.
 def intro(request):
     return render(request, 'web/intro.html')
+    if request.method == "POST" and request.is_ajax:
+        print("request POST AJAX")
 
 def test(request):
     return render(request, 'web/test.html')
