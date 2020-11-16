@@ -21,6 +21,10 @@ import web.api
 
 router = routers.DefaultRouter()
 router.register('stock_price',web.api.CurrentStockPriceViewSet)
+router.register('current_stock', web.api.CurrentStockViewSet)
+router.register('news_data', web.api.NewsDataViewSet)
+router.register('user_rank', web.api.UserRankViewSet)
+router.register('trading_log', web.api.TradingLogViewSet)
 
 urlpatterns = [
     path('', include('web.urls')),

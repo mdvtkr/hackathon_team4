@@ -3,7 +3,7 @@ import requests
 STOCK_CODE_LIST = ['005930','000660','068270','096530','105560','055550','009540','133750','057030','035720','035420','035760','352820','009830','011780','011070']
 
 
-getUrl = "http://localhost:8000/api/stock_price"
+getUrl = "http://:8000/api/stock_price"
 postUrl = 'http://localhost:8000/api/v1/stock_price/'
 
 if __name__ == "__main__":

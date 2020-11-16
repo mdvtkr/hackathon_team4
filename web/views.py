@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from django.views import View
 from django.conf import settings
-
 from django.http import JsonResponse
-import urllib.request as req
-import urllib.parse as parse
+
+from .api import *
+from .models import *
+
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 import requests
 import datetime
 
@@ -20,13 +25,50 @@ def base(request):
 
 
 # API
-def getStockList(request):
+def stockList(request):
     return JsonResponse(stockList())
 
-def getStockPrice(request):
-    return JsonResponse(stockPriceList(), safe=False)
+@api_view(['GET', 'POST', 'DELETE', 'PUT'])
+def stockPrice(request):
+    if request.method == 'POST':
+        serializer = CurrentStockPriceSerializer(data=request.data)
+        print(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+    elif request.method == 'PUT':
+        serializer = CurrentStockPriceSerializer(currentStockPrice,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+    elif request.method == 'DELETE':
+        currentStockPrice.delete()
+        return JsonResponse(stockPriceList(), safe=False)
+
+@api_view(['GET', 'POST', 'DELETE', 'PUT'])
+def currentStock(request):
+    if request.method == 'POST':
+        serializer = CurrentStockSerializer(data=request.data)
+        print(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+    elif request.method == 'PUT':
+        serializer = CurrentStockSerializer(currentStock,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+    elif request.method == 'DELETE':
+        currentStock.delete()
+        return JsonResponse(stockPriceList(), safe=False)
 
 
+
+
+
+
+
+# Koscom API
 def stockList():
     marketCode = 'kospi'
     url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'+marketCode+'/lists'
