@@ -4,8 +4,8 @@ import json
 STOCK_CODE_LIST = ['005930','000660','068270','096530','105560','055550','009540','133750','057030','035720','035420','035760','352820','009830','011780','011070']
 
 
-getPriceUrl = 'http://13.124.3.123:8080/api/kospi_stock_price'
-getListUrl = 'http://13.124.3.123:8080/api/kospi_stock_list'
+getPriceUrl = 'http://13.124.3.123:8080/api/v1/kospi_stock_price'
+getListUrl = 'http://13.124.3.123:8080/api/v1/kospi_stock_list'
 postUrl = 'http://13.124.3.123:8080/api/v1/stock_price/'
 
 # if __name__ == "__main__":
