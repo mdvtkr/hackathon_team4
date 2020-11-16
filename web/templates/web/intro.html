@@ -64,7 +64,7 @@
     $('#save').click(function(){
         var valueById = $('#nickname').val();
 
-        if(!("".equals(valueById))){
+        if(!(valueById.equals(""))){
             $.ajax({
                 url : 'http://13.124.3.123:8080/api/v1/user_rank/',
                 type : 'POST',
