@@ -2159,6 +2159,7 @@ select.form-control:focus::-ms-value {
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 35px;
+  width: 20rem;
 }
 
 select.form-control[size], select.form-control[multiple] {
@@ -3131,7 +3132,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-lg, .btn-group-lg > .btn {
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 35px;
