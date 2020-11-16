@@ -25,7 +25,7 @@ def base(request):
 
 # API
 def stockList(request):
-    return JsonResponse(koscomStockList())
+    return JsonResponse(koscomStockList(), safe=False)
 def stockPriceList(request):
     return JsonResponse(koscomStockPriceList(), safe=False)
 def currentStockRefresh(request):
@@ -73,11 +73,14 @@ def currentStock(request):
 
 # Koscom API
 def koscomStockList():
-    marketCode = 'kospi'
-    url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'+marketCode+'/lists'
-    headers = {'apiKey':'l7xxc59a3df427af489fa4234dce296492f3'}
-    res = requests.get(url, headers=headers)
-    return res.json()
+    codes = ['kospi','kosdaq']
+    ret = []
+    for marketCode in codes:
+        url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'+marketCode+'/lists'
+        headers = {'apiKey':'l7xxc59a3df427af489fa4234dce296492f3'}
+        res = requests.get(url, headers=headers)
+        ret.extend(res.json().get('isuLists'))
+    return ret
 
 def koscomStockPriceList():
     url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'
