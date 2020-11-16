@@ -2,16 +2,15 @@ from django.shortcuts import render
 from django.views import View
 from django.conf import settings
 from django.http import JsonResponse
-
 from .api import *
 from .models import *
-
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 import requests
 import datetime
+from .batch import *
 
 # Create your views here.
 def intro(request):
@@ -26,7 +25,11 @@ def base(request):
 
 # API
 def stockList(request):
-    return JsonResponse(stockList())
+    return JsonResponse(koscomStockList())
+def stockPriceList(request):
+    return JsonResponse(koscomStockPriceList(), safe=False)
+def currentStockRefresh(request):
+    return JsonResponse(currentStockBatch(), safe=False)
 
 @api_view(['GET', 'POST', 'DELETE', 'PUT'])
 def stockPrice(request):
@@ -69,14 +72,14 @@ def currentStock(request):
 
 
 # Koscom API
-def stockList():
+def koscomStockList():
     marketCode = 'kospi'
     url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'+marketCode+'/lists'
     headers = {'apiKey':'l7xxc59a3df427af489fa4234dce296492f3'}
     res = requests.get(url, headers=headers)
     return res.json()
 
-def stockPriceList():
+def koscomStockPriceList():
     url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'
     now = datetime.datetime.now()
     STOCK_CODE_LIST = ['005930', '000660', '068270', '096530', '105560', '055550', '009540', '133750', '057030',
@@ -86,7 +89,7 @@ def stockPriceList():
     inqStrtDd = (now - datetime.timedelta(days=3)).strftime('%Y%m%d')
     inqEndDd = now.strftime('%Y%m%d')
     reqCnt = '3'
-    headers = {'apiKey':'__APIKEY__'}
+    headers = {'apiKey':'l7xxc59a3df427af489fa4234dce296492f3'}
 
     ret = []
 
