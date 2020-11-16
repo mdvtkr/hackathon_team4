@@ -5,7 +5,8 @@ from django.http import JsonResponse
 from .api import *
 from .models import *
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import renderer_classes, api_view
+from rest_framework_swagger import renderers
 from rest_framework.response import Response
 
 import requests
@@ -24,52 +25,33 @@ def base(request):
 
 
 # API
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def stockList(request):
     return JsonResponse(koscomStockList(), safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def stockPriceList(request):
     return JsonResponse(koscomStockPriceList(), safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def currentStockRefresh(request):
     return JsonResponse(currentStockBatch(), safe=False)
-
-@api_view(['GET', 'POST', 'DELETE', 'PUT'])
-def stockPrice(request):
-    if request.method == 'POST':
-        serializer = CurrentStockPriceSerializer(data=request.data)
-        print(request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-    elif request.method == 'PUT':
-        serializer = CurrentStockPriceSerializer(currentStockPrice,data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-    elif request.method == 'DELETE':
-        currentStockPrice.delete()
-        return JsonResponse(stockPriceList(), safe=False)
-
-@api_view(['GET', 'POST', 'DELETE', 'PUT'])
-def currentStock(request):
-    if request.method == 'POST':
-        serializer = CurrentStockSerializer(data=request.data)
-        print(request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-    elif request.method == 'PUT':
-        serializer = CurrentStockSerializer(currentStock,data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-    elif request.method == 'DELETE':
-        currentStock.delete()
-        return JsonResponse(stockPriceList(), safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def tradingLogClear(request):
+    return JsonResponse(tradingLogClearDB(),safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def currentStockClear(request):
+    return JsonResponse(currentStockClearDB(),safe=False)
 
 
-
-
-
-
+# Server Logic
+def tradingLogClearDB():
+    return tradingLog.objects.all().delete()
+def currentStockClearDB():
+    return currentStock.objects.all().delete()
 
 # Koscom API
 def koscomStockList():

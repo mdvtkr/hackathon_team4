@@ -27,8 +27,10 @@ router.register('user_rank', web.api.UserRankViewSet)
 router.register('trading_log', web.api.TradingLogViewSet)
 
 urlpatterns = [
-    path('', include('web.urls')),
     path('admin/', admin.site.urls),
     path('api/swagger', get_swagger_view(title='swagger')),
+    path('', include('web.urls')),
     path('api/v1/', include((router.urls,'web'), namespace='api')),
 ]
+
+
