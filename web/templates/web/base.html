@@ -1168,9 +1168,8 @@
     function updateCardBody(){
       for(i in cards){
         var code = json.responseJSON[i].stock_code
-        document.getElementById(code).getElementByClassName("price").innerText
-        = json.responseJSON[i].current_price
-        
+        document.getElementById(code).getElementByClassName("price").innerText= json.responseJSON[i].current_price
+        console.log("code: " + code + " i: " + i);
       }
     }
 
