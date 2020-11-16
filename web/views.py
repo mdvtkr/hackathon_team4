@@ -25,10 +25,10 @@ def base(request):
 
 
 # API
-def stockList():
-    return JsonResponse(stockList())
-def stockPriceList():
-    return JsonResponse(stockPriceList())
+def stockList(request):
+    return JsonResponse(koscomStockList())
+def stockPriceList(request):
+    return JsonResponse(koscomStockPriceList())
 
 @api_view(['GET', 'POST', 'DELETE', 'PUT'])
 def stockPrice(request):
@@ -71,14 +71,14 @@ def currentStock(request):
 
 
 # Koscom API
-def stockList():
+def koscomStockList():
     marketCode = 'kospi'
     url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'+marketCode+'/lists'
     headers = {'apiKey':'l7xxc59a3df427af489fa4234dce296492f3'}
     res = requests.get(url, headers=headers)
     return res.json()
 
-def stockPriceList():
+def koscomStockPriceList():
     url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'
     now = datetime.datetime.now()
     STOCK_CODE_LIST = ['005930', '000660', '068270', '096530', '105560', '055550', '009540', '133750', '057030',
