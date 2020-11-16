@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -11,6 +12,7 @@
 
     <title>INTRO</title>
 
+    <link href="{% static 'web/_assets/css/test.css' %}" rel="stylesheet"/>
     <link href="{% static 'web/bootstrap/bootstrap.css' %}" rel="stylesheet" />
     <link
       href="{% static 'web/_assets/css/custom.min.css' %}"
@@ -18,6 +20,11 @@
     />
 
     <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <style>
+      body, h6{
+        font-family: 'Noto Sans KR', sans-serif;
+      }
+    </style>
 
     {% block content %}
     {% endblock %}
