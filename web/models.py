@@ -18,9 +18,7 @@ class newsData(models.Model):
     rate_105560 = models.IntegerField()
     rate_055550 = models.IntegerField()
     rate_009540 = models.IntegerField()
-    rate_133750 = models.IntegerField(
-
-    )
+    rate_133750 = models.IntegerField()
     rate_057030 = models.IntegerField()
     rate_035720 = models.IntegerField()
     rate_035420 = models.IntegerField()
