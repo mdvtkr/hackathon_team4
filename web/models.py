@@ -1,10 +1,11 @@
 from django.db import models
 
 class currentStockPrice(models.Model):
-    stock_code = models.IntegerField(primary_key=True)
+    stock_code = models.CharField(primary_key=True,max_length=30)
     stock_name = models.CharField(max_length=30)
     current_price = models.IntegerField()
 
+# 사전 지정해놓은 뉴스 데이
 class newsData(models.Model):
     id = models.AutoField(primary_key=True)
     news_data = models.CharField(max_length=300)
@@ -27,11 +28,13 @@ class newsData(models.Model):
     rate_011780 = models.IntegerField()
     rate_011070 = models.IntegerField()
 
+#
 class currentStock(models.Model):
-    stock_code = models.IntegerField(primary_key=True)
+    stock_code = models.CharField(primary_key=True,max_length=30)
     stock_quantity = models.IntegerField()
     average_price = models.IntegerField()
     current_price = models.IntegerField()
+    previous_price = models.IntegerField()
     earning_rate = models.IntegerField()
 
 class userRank(models.Model):
@@ -43,12 +46,16 @@ class userRank(models.Model):
 class tradingLog(models.Model):
     id = models.AutoField(primary_key=True)
     round = models.IntegerField()
-    stock_code = models.IntegerField()
+    stock_code = models.CharField(max_length=30)
     sell_count = models.IntegerField()
     buy_count = models.IntegerField()
 
 class stockReference(models.Model):
-    stock_code = models.IntegerField(primary_key=True)
+    stock_code = models.CharField(primary_key=True,max_length=30)
     stock_name = models.CharField(max_length = 30)
 
+class stockList(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length = 30)
+    stock = models.ForeignKey(currentStock, on_delete=models.CASCADE)
 # Create your models here.

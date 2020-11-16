@@ -70,4 +70,11 @@ class StockReference(admin.ModelAdmin):
         'stock_name'
     )
 
+@admin.register(models.stockList)
+class StockReference(admin.ModelAdmin):
+    list_display = (
+        'username',
+        'stock'
+    )
+
 # Register your models here.
