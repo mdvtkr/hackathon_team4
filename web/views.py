@@ -28,7 +28,7 @@ def base(request):
 def stockList(request):
     return JsonResponse(koscomStockList())
 def stockPriceList(request):
-    return JsonResponse(koscomStockPriceList())
+    return JsonResponse(koscomStockPriceList(), safe=False)
 
 @api_view(['GET', 'POST', 'DELETE', 'PUT'])
 def stockPrice(request):
