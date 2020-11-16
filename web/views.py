@@ -8,6 +8,8 @@ from rest_framework import status
 from rest_framework.decorators import renderer_classes, api_view
 from rest_framework_swagger import renderers
 from rest_framework.response import Response
+from django.shortcuts import render, redirect, get_object_or_404
+
 
 import requests
 import datetime
@@ -16,14 +18,22 @@ from .batch import *
 # Create your views here.
 def intro(request):
     return render(request, 'web/intro.html')
-    if request.method == "POST" and request.is_ajax:
+    if request.method == "POST":
         print("request POST AJAX")
+        print(request.POST)
+
 
 def test(request):
     return render(request, 'web/test.html')
 
 def base(request):
     return render(request, 'web/base.html')
+
+def baseNext(request, pk):
+    user = get_object_or_404(userRank, pk=pk)
+    return render(request, 'web/base.html')
+
+
 
 
 # API

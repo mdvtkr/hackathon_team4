@@ -408,7 +408,7 @@
                       <table class="table-card">
                         <tr>
                           <td class="td-card">price</td>
-                          <td class="td-card">2000</td>
+                          <td class="td-card price">2000</td>
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
@@ -1152,4 +1152,16 @@
       </div>
     </div>
 
+    <script>
+      var json = $.ajax({
+		url : 'http://13.124.3.123:8080/api/v1/stock_price/',
+		type : 'GET',
+		dataType : 'json',
+    });
+
+    var jsonForm = JSON.parse(json);
+
+    console.log(json);
+
+    </script>
 {% endblock %}
