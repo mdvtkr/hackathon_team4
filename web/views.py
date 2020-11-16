@@ -25,9 +25,9 @@ def base(request):
 
 
 # API
-def stockList(request):
+def stockList():
     return JsonResponse(stockList())
-def stockPriceList(request):
+def stockPriceList():
     return JsonResponse(stockPriceList())
 
 @api_view(['GET', 'POST', 'DELETE', 'PUT'])
