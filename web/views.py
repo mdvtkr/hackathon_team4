@@ -9,6 +9,7 @@ from rest_framework.decorators import renderer_classes, api_view
 from rest_framework_swagger import renderers
 from rest_framework.response import Response
 from django.shortcuts import render, redirect, get_object_or_404
+from random import randint
 
 
 import requests
@@ -85,6 +86,10 @@ def currentStockRefresh(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def currentStockAggregate(request):
     return JsonResponse(aggregateCurrentStock(),safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def updateCurrentStockAPI(request):
+    return JsonResponse(updateCurrentStock(),safe=False)
 
 
 # Server Logic
@@ -127,8 +132,20 @@ def aggregateCurrentStock():
 def updateCurrentStock():
     stockUrl = API_URL+'current_stock'
     newsUrl = API_URL+'news_data'
-    res = requests.get(stockUrl)
+    stockRes = requests.get(stockUrl).json()
+    newsRes = requests.get(newsUrl).json()
+    idx = randint(0,len(newsRes)-1)
+    news = newsRes[idx]
 
+    for stock in stockRes:
+        key = 'rate_'+stock['stock_code']
+        stock['previous_price'] = stock['current_price']
+        stock['current_price'] = stock['future_price']
+        stock['future_price'] = stock['current_price']*(100+news[key])/100
+    ret = {}
+    ret['news_data'] = news['news_data']
+    ret['stock_data'] = stockRes
+    return ret
 
 # Koscom API
 def koscomStockList():

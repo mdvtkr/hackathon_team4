@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/v1/current_stock_clear', views.currentStockClear, name='current_stock_clear'),
     path('api/v1/user_clear', views.userClear, name='user_rank_clear'),
     path('api/v1/aggregate', views.currentStockAggregate, name='aggregate'),
+    path('api/v1/update_current_stock', views.updateCurrentStockAPI, name='update'),
 
     # path('api/current_stock',views.currentStock, name='api'),
 ]
