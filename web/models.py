@@ -31,6 +31,7 @@ class newsData(models.Model):
 #
 class currentStock(models.Model):
     stock_code = models.CharField(primary_key=True,max_length=30)
+    stock_name = models.CharField(max_length=30, default="stock_name")
     stock_quantity = models.IntegerField()
     average_price = models.IntegerField()
     current_price = models.IntegerField()
@@ -38,8 +39,8 @@ class currentStock(models.Model):
     earning_rate = models.IntegerField()
 
 class userRank(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length = 30)
+    # id = models.AutoField()
+    username = models.CharField(max_length=30, primary_key=True)
     deposit = models.IntegerField(default=1000000)
     earning_rate = models.IntegerField()
     # date = models.DateTimeField(auto_now_add=True)

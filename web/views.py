@@ -18,6 +18,7 @@ from .batch import *
 
 logger = logging.getLogger(__name__)
 # Create your views here.
+API_URL = "http://13.124.3.123:8080/api/v1/"
 def intro(request):
     if request.method == "GET":
         logger.debug("logger.debug", request.GET)
@@ -41,6 +42,9 @@ def base(request):
         print(request.POST)
     return render(request, 'web/base.html')
 
+def ranking(request):
+    return render(request, 'web/ranking.html')
+
 def baseNext(request, pk):
     user = get_object_or_404(userRank, pk=pk)
     return render(request, 'web/base.html')
@@ -57,10 +61,10 @@ def stockList(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def stockPriceList(request):
     return JsonResponse(koscomStockPriceList(), safe=False)
-@api_view(['GET'])
-@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
-def currentStockRefresh(request):
-    return JsonResponse(currentStockBatch(), safe=False)
+# @api_view(['GET'])
+# @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+# def currentStockRefresh(request):
+#     return JsonResponse(currentStockBatch(), safe=False)
 @api_view(['GET'])
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def tradingLogClear(request):
@@ -69,6 +73,18 @@ def tradingLogClear(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def currentStockClear(request):
     return JsonResponse(currentStockClearDB(),safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def userClear(request):
+    return JsonResponse(userRankClearDB(),safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def currentStockRefresh(request):
+    return JsonResponse(refreshCurrentStock(),safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def currentStockAggregate(request):
+    return JsonResponse(aggregateCurrentStock(),safe=False)
 
 
 # Server Logic
@@ -76,6 +92,38 @@ def tradingLogClearDB():
     return tradingLog.objects.all().delete()
 def currentStockClearDB():
     return currentStock.objects.all().delete()
+def userRankClearDB():
+    return userRank.objects.all().delete()
+def refreshCurrentStock():
+    dbUrl = API_URL+'stock_price'
+    userUrl = API_URL+'current_stock'
+    res1 = requests.get(dbUrl)
+    res2 = requests.get(userUrl)
+    ret = []
+    for stock_user in res2.json():
+        for stock_db in res1.json():
+            if stock_db.get('stock_code') == stock_user.get('stock_code'):
+                stock_user['stock_quantity'] = 0
+                stock_user['current_price'] = stock_db['current_price']
+                res = requests.put(userUrl+'/'+stock_user['stock_code']+'/',data = stock_user)
+                ret.extend(res.json())
+                break
+    return ret
+
+def aggregateCurrentStock():
+    url = API_URL+'current_stock'
+    userUrl = API_URL + 'user_rank'
+    res = requests.get(url)
+    sum = 0
+    for stock in res.json():
+        sum += stock['current_price'] * stock['stock_quantity']
+    userRes = requests.get(userUrl)
+    deposit = userRes.json()[-1]['deposit']
+    profit = sum + deposit - 1000000
+    profitRatio = (profit / 1000000)*100
+    return {"profit":profit, "profitRatio":profitRatio}
+
+
 
 # Koscom API
 def koscomStockList():

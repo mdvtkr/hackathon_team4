@@ -1,13 +1,15 @@
-{% extends 'web/frame.html' %}
+﻿{% extends 'web/frame.html' %}
 
 {% load static  %}
 {% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+
 
     <script>
       var width = window.innerWidth / 2;
       var width4 = width / 3;
       var height = window.innerHeight;
-      var height4 = height / 7;
+      var height4 = height / 6;
       console.log("width: " + width4);
       console.log("height: " + height4);
 
@@ -21,6 +23,19 @@
         $(".panel1-box").css("height", height4);
         $(".panel1-box").css("width", "auto");
       });
+<!-- User Name Cookie-->
+      var getCookie = function(name) {
+        var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return value? value[2] : null;
+      };
+
+      var userName = getCookie("userName");
+
+      $("#"+userName+"").text(userName);
+      console.log($("#"+userName+"").text);
+
+
+
     </script>
 
     <style>
@@ -340,7 +355,7 @@
                         <figure class="profile">
                             <img src="https://i.pinimg.com/originals/5a/78/a8/5a78a8c0259059d0043669a4cda7445a.gif" class="profile-avatar" alt="">
                         </figure>
-                        <h4 class="card-title mt-3">이름</h4>
+                        <h4 class="card-title mt-3" id="userName">이름</h4>
                       </div>
                       <div class="secondo">
                         <div class="meta">
@@ -962,10 +977,11 @@
                 <div
                   class="progress-bar bg-danger"
                   role="progressbar"
+                  id="progressBar"
                   style="width: 25%"
-                  aria-valuenow="25"
+                  aria-valuenow="0"
                   aria-valuemin="0"
-                  aria-valuemax="100"
+                  aria-valuemax="10"
                 ></div>
               </div>
             </div>
@@ -979,7 +995,7 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th scope="col">Round</th>
+<!--                      <th scope="col">Round</th>-->
                       <th scope="col">Stock</th>
                       <th scope="col">Purchase</th>
                       <th scope="col">Sale</th>
@@ -987,41 +1003,18 @@
                   </thead>
                   <tbody>
                     <tr class="table-active">
-                      <th scope="row">1R</th>
+<!--                      <th scope="row">1R</th>-->
                       <td>SAMSUNG</td>
                       <td>10</td>
                       <td>0</td>
                     </tr>
                     <tr class="table-active">
-                      <th scope="row">1R</th>
+<!--                      <th scope="row">1R</th>-->
                       <td>Celltrion</td>
                       <td>0</td>
                       <td>4</td>
                     </tr>
-                    <tr class="table-active">
-                      <th scope="row">1R</th>
-                      <td>SAMSUNG</td>
-                      <td>10</td>
-                      <td>0</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">1R</th>
-                      <td>Celltrion</td>
-                      <td>0</td>
-                      <td>4</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">1R</th>
-                      <td>SAMSUNG</td>
-                      <td>10</td>
-                      <td>0</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">1R</th>
-                      <td>Celltrion</td>
-                      <td>0</td>
-                      <td>4</td>
-                    </tr>
+
                   </tbody>
                 </table>
                 <hr class="my-4" />
@@ -1097,8 +1090,8 @@
                   data-toggle="modal"
                   href="#aggregateModal"
                   role="button"
-                  >Next Round</a
-                >
+                  id="nextRoundBtn">
+                  Next Round</a>
               </div>
             </div>
           </div>
@@ -1122,15 +1115,16 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>현재 라운드: 1Round</p>
-            <p>총 손익금액: ₩164,433,432</p>
-            <p>수익률: 1212%</p>
+            <p id="currentRound">현재 라운드: 1Round</p>
+            <p id="currentProfit">총 손익금액: ₩164,433,432</p>
+            <p id="currentProfitRatio">수익률: 1212%</p>
           </div>
           <div class="modal-footer">
             <button
               type="button"
               class="btn btn-outline-success"
               data-dismiss="modal"
+              id="closeRoundBtn"
             >
               Close
             </button>
@@ -1140,8 +1134,34 @@
     </div>
 
     <script>
-
+    var getCookie = function(name) {
+      var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+      return value? value[2] : null;
+    };
+    var setCookie = function(name, value, exp) {
+      var date = new Date();
+      date.setTime(date.getTime() + exp*24*60*60*1000);
+      document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+    }
     $(document).ready(function(){
+      var userName = getCookie("userName");
+      var curRound = getCookie("round");
+      userInfo = $.ajax({
+        url : 'http://13.124.3.123:8080/api/v1/user_rank/'+userName,
+        type :  'GET',
+        dataType : 'json',
+        async: false,
+      });
+
+      $("#userName").text(userName);
+      $("#balance").text(userInfo.responseJSON.deposit);
+      var width = "width: "+curRound+0+"%"
+      $("#progressBar").attr("style",width);
+      console.log($("#userName").text);
+      console.log(userName);
+      console.log(userInfo);
+
+
         json = $.ajax({
         url : 'http://13.124.3.123:8080/api/v1/stock_price/',
         type : 'GET',
@@ -1149,16 +1169,12 @@
         async: false,
         }); 
 
-        console.log(json);
 
         for(var i = 0; i<json.responseJSON.length; i++){
-        var curStork = json.responseJSON[i].current_price;
+        var curStock = json.responseJSON[i].current_price;
         var code = json.responseJSON[i].stock_code;
-        console.log(curStork);
-        console.log("#"+code+"");
 
-        $("#"+code+"").find('td.price').text(curStork);
-        console.log($("#"+code+"").find('td.price').text);
+        $("#"+code+"").find('td.price').text(curStock);
         }
 
     });
@@ -1249,6 +1265,8 @@
       var stock_code = row[1]+item;
 
 
+      stockId = row[1] + item;
+
       var path = "#\\"+ row +" "+ item +" > table > tbody > tr:nth-child(1) > td:nth-child(2)"
       console.log('path: ', path);
       var price = document.querySelector(path).textContent
@@ -1327,9 +1345,39 @@
       } else {
         alert("판매 하려는 주식 수량이 보유 수량보다 많습니다.");
       }
+
+      //sell buy 할 때, DB에 PUT
+
+
+
     }
 
 
+    $("#nextRoundBtn").bind("click", function(event, ui){
+      var round = getCookie("round");
+      var width = "width: "+round+0+"%"
+      $("#progressBar").attr("style",width);
+      $("#currentRound").text("현재 라운드: "+round+"Round");
+
+      json = $.ajax({
+        url : 'http://13.124.3.123:8080/api/v1/aggregate',
+        type : 'GET',
+        dataType : 'json',
+        async: false,
+      });
+      $("#currentProfit").text("총 손익금액: ₩"+json.responseJSON.profit);
+      $("#currentProfitRatio").text("수익률: "+json.responseJSON.profitRatio+"%");
+
+      round *= 1;
+      round += 1;
+      setCookie("round",Number(round));
+    });
+    $("#closeRoundBtn").bind("click", function(event, ui){
+      var round = getCookie("round");
+      if(Number(round) > Number(10)){
+        $(location).attr('href','http://13.124.3.123:8080/ranking')
+      }
+    });
     </script>
 
 {% endblock %}

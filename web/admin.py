@@ -48,7 +48,7 @@ class CurrentStock(admin.ModelAdmin):
 @admin.register(models.userRank)
 class UserRank(admin.ModelAdmin):
     list_display = (
-        'id',
+        # 'id',
         'username',
         'earning_rate'
     )
