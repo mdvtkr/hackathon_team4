@@ -18,7 +18,7 @@ from .batch import *
 
 logger = logging.getLogger(__name__)
 # Create your views here.
-API_URL = "http://13.124.3.123:8080/api/v1/"
+API_URL = "http://15.164.171.146:8080/api/v1/"
 def intro(request):
     if request.method == "GET":
         logger.debug("logger.debug", request.GET)
@@ -137,6 +137,7 @@ def koscomStockList():
     return ret
 
 def koscomStockPriceList():
+
     url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'
     now = datetime.datetime.now()
     STOCK_CODE_LIST = ['005930', '000660', '068270', '096530', '105560', '055550', '009540', '133750', '057030',
