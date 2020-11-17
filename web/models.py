@@ -41,7 +41,7 @@ class userRank(models.Model):
     # id = models.AutoField()
     username = models.CharField(max_length=30, primary_key=True)
     deposit = models.IntegerField(default=1000000)
-    earning_rate = models.IntegerField()
+    earning_rate = models.FloatField(default=0)
     # date = models.DateTimeField(auto_now_add=True)
 
 class tradingLog(models.Model):

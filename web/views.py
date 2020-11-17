@@ -133,7 +133,7 @@ def aggregateCurrentStock(request):
     deposit = curUser['deposit']
     profit = sum + deposit - 1000000
     profitRatio = (profit / 1000000)*100
-    curUser['earning_rate'] = int(profitRatio*10000)
+    curUser['earning_rate'] = profitRatio
     putUrl = userUrl+'/'
     res2 = requests.put(putUrl, data=curUser)
     return {"profit":profit, "profitRatio":profitRatio}
@@ -170,7 +170,6 @@ def koscomStockList():
     return ret
 
 def koscomStockPriceList():
-
     url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'
     now = datetime.datetime.now()
     STOCK_CODE_LIST = ['005930', '000660', '068270', '096530', '105560', '055550', '009540', '133750', '057030',
@@ -180,12 +179,12 @@ def koscomStockPriceList():
     inqStrtDd = (now - datetime.timedelta(days=3)).strftime('%Y%m%d')
     inqEndDd = now.strftime('%Y%m%d')
     reqCnt = '3'
-    headers = {'apiKey':'l7xxc59a3df427af489fa4234dce296492f3'}
+    headers = {'apiKey':'__API_KEY__'}
 
     ret = []
 
     for stockCode in STOCK_CODE_LIST:
-        url = 'https://sandbox-apigw.koscom.co.kr/v2/market/stocks/'+marketCode+'/'+stockCode+'/history?trnsmCycleTpCd='+trnsmCycleTpCd+'&inqStrtDd='+inqStrtDd+'&inqEndDd='+inqEndDd+'&reqCnt='+reqCnt
+        url = url+marketCode+'/'+stockCode+'/history?trnsmCycleTpCd='+trnsmCycleTpCd+'&inqStrtDd='+inqStrtDd+'&inqEndDd='+inqEndDd+'&reqCnt='+reqCnt
         res = requests.get(url, headers=headers)
         ret.append(res.json())
     return ret
