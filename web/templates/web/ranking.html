@@ -51,25 +51,7 @@
 
 </style>
 
-<div class="container">
-  <div>
-    <h1>Ranking</h1>
-  </div>
-  <div id="ranking">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <table class="table-head">
-        <tr class="tr-head">
-          <td class="td-head">등수</td>
-          <td class="td-head">닉네임</td>
-          <td class="td-head">수익률</td>
-          <td class="td-head">자산</td>
-        </tr>
-      </table>
-    </nav>
 
-
-  </div>
-</div>
 
 <script>
   var width = window.innerWidth * 0.5;
@@ -79,7 +61,8 @@
     $(".container").css("height", height);
     $(".container").css("width", width);
     $(".td-head").css("width", width / 4);
-    $(".td-body").css("width", width / 4);
+
+
 
     getRanking();
   });
@@ -90,7 +73,7 @@
 
     var json_data;
 
-    $.ajax({
+    json = $.ajax({
       type: "GET",
       url: uri,
       async: false,
@@ -149,6 +132,8 @@
     var rankingBoard = document.getElementById("ranking");
 
     for (var i = 0; i < 10; i++) {
+
+
       var nav = document.createElement("nav");
       nav.classList.add("navbar");
       nav.classList.add("navbar-expand-lg");
@@ -186,9 +171,33 @@
       tr.appendChild(td4);
     }
 
+    var width = window.innerWidth * 0.5;
+    $(".td-body").css("width", width / 4);
+
     return columnSet;
   }
 </script>
+
+<div class="container">
+  <div>
+    <h1>Ranking</h1>
+  </div>
+  <div id="ranking">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <table class="table-head">
+        <tr class="tr-head">
+          <td class="td-head">등수</td>
+          <td class="td-head">닉네임</td>
+          <td class="td-head">수익률</td>
+          <td class="td-head">자산</td>
+        </tr>
+      </table>
+    </nav>
+
+
+  </div>
+</div>
+
 
 {% endblock %}
 
