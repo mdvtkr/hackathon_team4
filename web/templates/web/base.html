@@ -413,7 +413,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -448,7 +448,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -483,7 +483,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -518,7 +518,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -555,7 +555,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -590,7 +590,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -625,7 +625,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -660,7 +660,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -697,7 +697,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -732,7 +732,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -767,7 +767,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -802,7 +802,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -839,7 +839,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -874,7 +874,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -909,7 +909,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -944,7 +944,7 @@
                         </tr>
                         <tr>
                           <td class="td-card">가격변동</td>
-                          <td class="td-card"></td>
+                          <td class="td-card change">0</td>
                         </tr>
                         <tr>
                           <td class="td-card">
@@ -1402,6 +1402,33 @@
 
 
     $("#nextRoundBtn").bind("click", function(event, ui){
+      curStock = $.ajax({
+      url : 'http://15.164.171.146:8080/api/v1/current_stock/',
+      type : 'GET',
+      dataType : 'json',
+      async: false,
+      });
+
+      console.log(curStock);
+
+      for(var i = 0; i<curStock.responseJSON.length; i++){
+      var prePrice = curStock.responseJSON[i].previous_price;
+      var curPrice = curStock.responseJSON[i].current_price;
+      var code = curStock.responseJSON[i].stock_code;
+      var change = curPrice - prePrice;
+
+      if(change>=0){
+        console.log("+");
+        $("#"+code+"").find('td.change').text("+"+change);
+      }else{
+        console.log("-");
+        $("#"+code+"").find('td.change').text(change);
+      }
+
+      }
+
+
+
       var round = getCookie("round");
       var width = "width: "+round+0+"%"
       $("#progressBar").attr("style",width);
