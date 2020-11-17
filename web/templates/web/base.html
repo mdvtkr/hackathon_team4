@@ -2,12 +2,14 @@
 
 {% load static  %}
 {% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+
 
     <script>
       var width = window.innerWidth / 2;
       var width4 = width / 3;
       var height = window.innerHeight;
-      var height4 = height / 7;
+      var height4 = height / 6;
       console.log("width: " + width4);
       console.log("height: " + height4);
 
@@ -1006,7 +1008,7 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th scope="col">Round</th>
+<!--                      <th scope="col">Round</th>-->
                       <th scope="col">Stock</th>
                       <th scope="col">Purchase</th>
                       <th scope="col">Sale</th>
@@ -1014,41 +1016,18 @@
                   </thead>
                   <tbody>
                     <tr class="table-active">
-                      <th scope="row">1R</th>
+<!--                      <th scope="row">1R</th>-->
                       <td>SAMSUNG</td>
                       <td>10</td>
                       <td>0</td>
                     </tr>
                     <tr class="table-active">
-                      <th scope="row">1R</th>
+<!--                      <th scope="row">1R</th>-->
                       <td>Celltrion</td>
                       <td>0</td>
                       <td>4</td>
                     </tr>
-                    <tr class="table-active">
-                      <th scope="row">1R</th>
-                      <td>SAMSUNG</td>
-                      <td>10</td>
-                      <td>0</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">1R</th>
-                      <td>Celltrion</td>
-                      <td>0</td>
-                      <td>4</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">1R</th>
-                      <td>SAMSUNG</td>
-                      <td>10</td>
-                      <td>0</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">1R</th>
-                      <td>Celltrion</td>
-                      <td>0</td>
-                      <td>4</td>
-                    </tr>
+
                   </tbody>
                 </table>
                 <hr class="my-4" />
@@ -1210,6 +1189,8 @@
       /* row: row number 1 => 30 */
       /* item: stock id */
 
+      stockId = row[1] + item;
+
       var path = "#\\"+ row +" "+ item +" > table > tbody > tr:nth-child(1) > td:nth-child(2)"
       var price = document.querySelector(path).textContent
 
@@ -1252,6 +1233,11 @@
         console.log("I will sell" + stockId + " money: " + setPrice);
         console.log("DB API이용해서 팔 수 있는 갯수만큼 내가 현재 주식을 보유중인지 체크한 후 파는 경우 처리 구현 필요");
       }
+
+      //sell buy 할 때, DB에 PUT
+
+
+
     }
 
 
