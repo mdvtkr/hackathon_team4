@@ -1011,7 +1011,7 @@
               <div class="jumbotron">
                 <h4>Return on Investment History</h4>
                 <p>각 라운드 별 투자 수익률 현황입니다.</p>
-                <table class="table table-hover">
+                <table class="table table-hover" id="profitTable">
                   <thead>
                     <tr>
                       <th scope="col">Round</th>
@@ -1020,51 +1020,51 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="table-active">
-                      <th scope="row">1R</th>
-                      <td>100,000</td>
-                      <td>3.5%</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">2R</th>
-                      <td>100,000</td>
-                      <td>3.5%</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">3R</th>
-                      <td>100,000</td>
-                      <td>3.5%</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">4R</th>
-                      <td>100,000</td>
-                      <td>3.5%</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">5R</th>
-                      <td>100,000</td>
-                      <td>3.5%</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">6R</th>
-                      <td>100,000</td>
-                      <td>3.5%</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">7R</th>
-                      <td>100,000</td>
-                      <td>3.5%</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">8R</th>
-                      <td>100,000</td>
-                      <td>3.5%</td>
-                    </tr>
-                    <tr class="table-active">
-                      <th scope="row">9R</th>
-                      <td>100,000</td>
-                      <td>3.5%</td>
-                    </tr>
+<!--                    <tr class="table-active">-->
+<!--                      <th scope="row">1R</th>-->
+<!--                      <td>100,000</td>-->
+<!--                      <td>3.5%</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="table-active">-->
+<!--                      <th scope="row">2R</th>-->
+<!--                      <td>100,000</td>-->
+<!--                      <td>3.5%</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="table-active">-->
+<!--                      <th scope="row">3R</th>-->
+<!--                      <td>100,000</td>-->
+<!--                      <td>3.5%</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="table-active">-->
+<!--                      <th scope="row">4R</th>-->
+<!--                      <td>100,000</td>-->
+<!--                      <td>3.5%</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="table-active">-->
+<!--                      <th scope="row">5R</th>-->
+<!--                      <td>100,000</td>-->
+<!--                      <td>3.5%</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="table-active">-->
+<!--                      <th scope="row">6R</th>-->
+<!--                      <td>100,000</td>-->
+<!--                      <td>3.5%</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="table-active">-->
+<!--                      <th scope="row">7R</th>-->
+<!--                      <td>100,000</td>-->
+<!--                      <td>3.5%</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="table-active">-->
+<!--                      <th scope="row">8R</th>-->
+<!--                      <td>100,000</td>-->
+<!--                      <td>3.5%</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="table-active">-->
+<!--                      <th scope="row">9R</th>-->
+<!--                      <td>100,000</td>-->
+<!--                      <td>3.5%</td>-->
+<!--                    </tr>-->
                   </tbody>
                 </table>
               </div>
@@ -1450,7 +1450,7 @@
       });
       $("#currentProfit").text("총 손익금액: ₩"+json.responseJSON.profit);
       $("#currentProfitRatio").text("수익률: "+json.responseJSON.profitRatio+"%");
-
+      $("#profitTable > tbody:last").append('<tr class="table-active"><th scope="row">'+round+'R</th><td>'+profit+'</td><td>'+profitRatio+'%</td></tr>);
       round *= 1;
       round += 1;
       setCookie("round",Number(round));
