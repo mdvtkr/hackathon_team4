@@ -11,6 +11,7 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Neucha|Cabin+Sketch&display=swap");
 :root {
   --blue: #007bff;
@@ -365,7 +366,7 @@ template {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
-  font-family: "Cabin Sketch", cursive;
+  font-family: "Cabin Sketch", 'Noto Sans KR', cursive, sans-serif;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -10303,7 +10304,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .navbar-brand {
-  font-family: "Cabin Sketch", cursive;
+  font-family: "Cabin Sketch", cursive, 'Noto Sans KR', sans-serif;
   font-weight: 400;
   text-decoration: none;
 }
