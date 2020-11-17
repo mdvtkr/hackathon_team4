@@ -134,7 +134,8 @@ def aggregateCurrentStock(request):
     profit = sum + deposit - 1000000
     profitRatio = (profit / 1000000)*100
     curUser['earning_rate'] = profitRatio
-    res2 = requests.put(userUrl+'/', data=curUser)
+    putUrl = userUrl+'/'
+    res2 = requests.put(userUrl, data=curUser)
     return {"profit":profit, "profitRatio":profitRatio}
 
 def updateCurrentStock():
