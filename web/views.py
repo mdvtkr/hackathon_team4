@@ -82,10 +82,10 @@ def userClear(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def currentStockRefresh(request):
     return JsonResponse(refreshCurrentStock(),safe=False)
-@api_view(['GET'])
+@api_view(['GET','POST'])
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def currentStockAggregate(request):
-    return JsonResponse(aggregateCurrentStock(),safe=False)
+    return JsonResponse(aggregateCurrentStock(request),safe=False)
 @api_view(['GET'])
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def updateCurrentStockAPI(request):
@@ -118,15 +118,17 @@ def refreshCurrentStock():
     ret = updateCurrentStock()
     return ret
 
-def aggregateCurrentStock():
+def aggregateCurrentStock(request):
+    print(request.data)
+    data = request.data
     url = API_URL+'current_stock'
-    userUrl = API_URL + 'user_rank'
+    userUrl = API_URL + 'user_rank/'+data['username']
     res = requests.get(url)
     sum = 0
     for stock in res.json():
         sum += stock['current_price'] * stock['stock_quantity']
     userRes = requests.get(userUrl)
-    deposit = userRes.json()[-1]['deposit']
+    deposit = userRes.json()['deposit']
     profit = sum + deposit - 1000000
     profitRatio = (profit / 1000000)*100
     return {"profit":profit, "profitRatio":profitRatio}
