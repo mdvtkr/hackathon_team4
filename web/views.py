@@ -62,10 +62,10 @@ def stockList(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def stockPriceList(request):
     return JsonResponse(koscomStockPriceList(), safe=False)
-# @api_view(['GET'])
-# @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
-# def currentStockRefresh(request):
-#     return JsonResponse(currentStockBatch(), safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def currentStockBatch(request):
+    return JsonResponse(currentStockBatch(), safe=False)
 @api_view(['GET'])
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def tradingLogClear(request):
