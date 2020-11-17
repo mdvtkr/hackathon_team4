@@ -41,6 +41,9 @@ def base(request):
         print(request.POST)
     return render(request, 'web/base.html')
 
+def ranking(request):
+    return render(request, 'web/ranking.html')
+
 def baseNext(request, pk):
     user = get_object_or_404(userRank, pk=pk)
     return render(request, 'web/base.html')
