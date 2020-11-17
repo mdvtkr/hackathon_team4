@@ -179,7 +179,7 @@ def koscomStockPriceList():
     inqStrtDd = (now - datetime.timedelta(days=3)).strftime('%Y%m%d')
     inqEndDd = now.strftime('%Y%m%d')
     reqCnt = '3'
-    headers = {'apiKey':'__API_KEY__'}
+    headers = {'apiKey':'l7xxc59a3df427af489fa4234dce296492f3'}
 
     ret = []
 

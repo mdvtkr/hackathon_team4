@@ -4,9 +4,9 @@ import json
 STOCK_CODE_LIST = ['005930','000660','068270','096530','105560','055550','009540','133750','057030','035720','035420','035760','352820','009830','011780','011070']
 
 
-getPriceUrl = 'http://localhost:8080/api/v1/kospi_stock_price'
-getListUrl = 'http://localhost:8080/api/v1/kospi_stock_list'
-postUrl = 'http://localhost:8080/api/v1/stock_price/'
+getPriceUrl = 'http://15.164.171.146:8080/api/v1/kospi_stock_price'
+getListUrl = 'http://15.164.171.146:8080/api/v1/kospi_stock_list'
+postUrl = 'http://15.164.171.146:8080/api/v1/stock_price/'
 
 # if __name__ == "__main__":
 def currentStockBatch():
@@ -35,3 +35,4 @@ def currentStockBatch():
         res = requests.put(url=postUrl+data['stock_code']+'/', data=json.dumps(data), headers=headers)
         ret2.append(res.json())
     return ret2
+currentStockBatch()
