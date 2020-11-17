@@ -130,10 +130,11 @@ def aggregateCurrentStock(request):
         sum += stock['current_price'] * stock['stock_quantity']
     userRes = requests.get(userUrl)
     curUser = userRes.json()
-    deposit = curUser['deposit']
-    profit = sum + deposit - 1000000
-    profitRatio = (profit / 1000000)*100
-    return {"profit":profit, "profitRatio":profitRatio}
+    return curUser
+    # deposit = curUser['deposit']
+    # profit = sum + deposit - 1000000
+    # profitRatio = (profit / 1000000)*100
+    # return {"profit":profit, "profitRatio":profitRatio}
 
 def updateCurrentStock():
     stockUrl = API_URL+'current_stock'
