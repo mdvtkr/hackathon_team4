@@ -1140,6 +1140,7 @@
               type="button"
               class="btn btn-outline-success"
               data-dismiss="modal"
+              id="closeRoundBtn"
             >
               Close
             </button>
@@ -1257,10 +1258,13 @@
       $("#currentRound").text("현재 라운드: "+round+"Round");
       round *= 1;
       round += 1;
+      setCookie("round",Number(round));
+    });
+    $("#closeRoundBtn").bind("click", function(event, ui){
+      var round = getCookie("round");
       if(round==10){
         $(location).attr('href','http://13.124.3.123:8080/ranking')
       }
-      setCookie("round",Number(round));    });
-
+    });
     </script>
 {% endblock %}
