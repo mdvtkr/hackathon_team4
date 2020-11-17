@@ -60,10 +60,10 @@ def stockList(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def stockPriceList(request):
     return JsonResponse(koscomStockPriceList(), safe=False)
-@api_view(['GET'])
-@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
-def currentStockRefresh(request):
-    return JsonResponse(currentStockBatch(), safe=False)
+# @api_view(['GET'])
+# @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+# def currentStockRefresh(request):
+#     return JsonResponse(currentStockBatch(), safe=False)
 @api_view(['GET'])
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def tradingLogClear(request):
@@ -76,6 +76,10 @@ def currentStockClear(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def userClear(request):
     return JsonResponse(userRankClearDB(),safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def currentStockRefresh(request):
+    return JsonResponse(refreshCurrentStock(),safe=False)
 
 
 # Server Logic
@@ -85,7 +89,24 @@ def currentStockClearDB():
     return currentStock.objects.all().delete()
 def userRankClearDB():
     return userRank.objects.all().delete()
+def refreshCurrentStock():
+    dbUrl = 'http://13.124.3.123:8080/api/v1/stock_price'
+    userUrl = 'http://13.124.3.123:8080/api/v1/current_stock'
+    res1 = requests.get(dbUrl)
+    res2 = requests.get(userUrl)
+    ret = []
+    for stock_user in res2.json():
+        for stock_db in res1.json():
+            if stock_db.get('stock_code') == stock_user.get('stock_code'):
+                stock_user['stock_quantity'] = 0
+                stock_user['current_price'] = stock_db['current_price']
+                res = requests.put(userUrl+'/'+stock_user['stock_code']+'/',data = stock_user)
+                ret.extend(res.json())
+                break
+    return ret
 
+
+    return res.json()
 # Koscom API
 def koscomStockList():
     codes = ['kospi','kosdaq']
