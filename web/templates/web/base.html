@@ -999,20 +999,7 @@
                       <th scope="col">Sale</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr class="table-active">
-<!--                      <th scope="row">1R</th>-->
-                      <td>SAMSUNG</td>
-                      <td>10</td>
-                      <td>0</td>
-                    </tr>
-                    <tr class="table-active">
-<!--                      <th scope="row">1R</th>-->
-                      <td>Celltrion</td>
-                      <td>0</td>
-                      <td>4</td>
-                    </tr>
-
+                  <tbody id="table-body">
                   </tbody>
                 </table>
                 <hr class="my-4" />
@@ -1321,6 +1308,27 @@
         patchDeposit(username, currentBalance);
 
       }
+
+      var tbody = document.getElementById('table-body');
+      var tr1 = document.createElement('tr');
+      tr1.classList.add('table-active');
+      tbody.appendChild(tr1);
+
+      var td1 = document.createElement('td');
+      td1.innerText = stock_name;
+
+      var td2 = document.createElement('td');
+      td2.innerText = count;
+
+      var td3 = document.createElement('td');
+      td3.innerText = '0';
+
+      tr1.appendChild(td1);
+      tr1.appendChild(td2);
+      tr1.appendChild(td3);
+
+
+
     }
 
     function flashInSufficientBalance(setPrice) {
@@ -1371,6 +1379,24 @@
       }
 
       //sell buy 할 때, DB에 PUT
+
+      var tbody = document.getElementById('table-body');
+      var tr1 = document.createElement('tr');
+      tr1.classList.add('table-active');
+      tbody.appendChild(tr1);
+
+      var td1 = document.createElement('td');
+      td1.innerText = stock_name;
+
+      var td2 = document.createElement('td');
+      td2.innerText = '0';
+
+      var td3 = document.createElement('td');
+      td3.innerText = count;
+
+      tr1.appendChild(td1);
+      tr1.appendChild(td2);
+      tr1.appendChild(td3);
     }
 
 
