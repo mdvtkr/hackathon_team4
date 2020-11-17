@@ -1,100 +1,21 @@
-{% extends 'web/frame.html' %}
-
-{% load static  %}
-{% block content %}
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-<script>
-  var width = window.innerWidth *0.5;
-  var height = window.innerHeight * 0.65;
-
-  $(document).ready(function () {
-        $(".container").css("height", height);
-        $(".container").css("width", width);
-        $(".td-head").css("width", width/4);
-        $(".td-body").css("width", width/4);
-
-        getRanking();
-      });
-
-  function getRanking(){
-    uri = 'http://15.164.171.146:8080/api/v1/user_rank/'
-    console.log("getRanking uri :", uri);
-
-    var json_data;
-
-    $.ajax({
-        type: 'GET',
-        url: uri,
-        async: false,
-        error: function(e) {
-          console.log(e);
-        },
-        success: function(data) {
-            json_data = data;
-        },
-        dataType: "json",
-        contentType: "application/json"
-    });
-
-    json_data.sort(function(a, b){
-        return b.earning_rate - a.earning_rate;
-    });
-
-    var table1 = $("#table1")
-
-    buildHtmlTable(table1, json_data);
-  }
-
-  // Builds the HTML Table out of myList.
-  function buildHtmlTable(selector, myList) {
-      var columns = addAllColumnHeaders(myList, selector);
-
-      for (var i = 0; i < myList.length; i++) {
-        var row$ = $('<tr/>');
-        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
-          var cellValue = myList[i][columns[colIndex]];
-          if (cellValue == null) cellValue = "";
-          row$.append($('<td/>').html(cellValue));
-        }
-        $(selector).append(row$);
-      }
-  }
-
-  // Adds a header row to the table and returns the set of columns.
-  // Need to do union of keys from all records as some records may not contain
-  // all records.
-  function addAllColumnHeaders(myList, selector) {
-      var columnSet = [];
-      var headerTr$ = $('<tr/>');
-
-      for (var i = 0; i < myList.length; i++) {
-        var rowHash = myList[i];
-        for (var key in rowHash) {
-          if ($.inArray(key, columnSet) == -1) {
-            columnSet.push(key);
-            headerTr$.append($('<th/>').html(key));
-          }
-        }
-      }
-      $(selector).append(headerTr$);
-
-      return columnSet;
-  }
-
-</script>
+{% extends 'web/frame.html' %} {% load static %} {% block content %}
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap"
+  rel="stylesheet"
+/>
 
 <style>
-    .navbar{
-        position: static;
-        margin: 0.5rem;
-    }
+  .navbar {
+    position: static;
+    margin: 0.5rem;
+  }
 
-    h1{
-        text-align: center;
-    }
+  h1 {
+    text-align: center;
+  }
 
-    .tr-head{
+.tr-head{
         background-color: #555 !important;
         position: relative;
         text-align: center;
@@ -128,73 +49,156 @@
         text-align: center;
     }
 
-
-
 </style>
 
+
+
+<script>
+  var width = window.innerWidth * 0.5;
+  var height = window.innerHeight * 0.65;
+
+  $(document).ready(function () {
+    $(".container").css("height", height);
+    $(".container").css("width", width);
+    $(".td-head").css("width", width / 4);
+
+
+
+    getRanking();
+  });
+
+  function getRanking() {
+    uri = "http://15.164.171.146:8080/api/v1/user_rank/";
+    console.log("getRanking uri :", uri);
+
+    var json_data;
+
+    json = $.ajax({
+      type: "GET",
+      url: uri,
+      async: false,
+      error: function (e) {
+        console.log(e);
+      },
+      success: function (data) {
+        json_data = data;
+      },
+      dataType: "json",
+      contentType: "application/json",
+    });
+
+    json_data.sort(function (a, b) {
+      return b.earning_rate - a.earning_rate;
+    });
+
+    var table1 = $("#table1");
+
+    buildHtmlTable(table1, json_data);
+  }
+
+  // Builds the HTML Table out of myList.
+  function buildHtmlTable(selector, myList) {
+    var columns = addAllColumnHeaders(myList, selector);
+
+    for (var i = 0; i < myList.length; i++) {
+      var row$ = $("<tr/>");
+      for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+        var cellValue = myList[i][columns[colIndex]];
+        if (cellValue == null) cellValue = "";
+        row$.append($("<td/>").html(cellValue));
+      }
+      $(selector).append(row$);
+    }
+  }
+
+  // Adds a header row to the table and returns the set of columns.
+  // Need to do union of keys from all records as some records may not contain
+  // all records.
+  function addAllColumnHeaders(myList, selector) {
+    var columnSet = [];
+    var headerTr$ = $("<tr/>");
+    console.log(myList);
+    for (var i = 0; i < myList.length; i++) {
+      var rowHash = myList[i];
+      for (var key in rowHash) {
+        if ($.inArray(key, columnSet) == -1) {
+          columnSet.push(key);
+          headerTr$.append($("<th/>").html(key));
+        }
+      }
+    }
+    $(selector).append(headerTr$);
+
+    var rankingBoard = document.getElementById("ranking");
+
+    for (var i = 0; i < 10; i++) {
+
+
+      var nav = document.createElement("nav");
+      nav.classList.add("navbar");
+      nav.classList.add("navbar-expand-lg");
+      nav.classList.add("navbar-light");
+      nav.classList.add("bg-light");
+      rankingBoard.appendChild(nav);
+
+      var table = document.createElement("table");
+      table.classList.add("table-body");
+      nav.appendChild(table);
+
+      var tr = document.createElement("tr");
+      tr.classList.add("tr-body");
+      table.appendChild(tr);
+
+      var td1 = document.createElement("td");
+      td1.classList.add("td-body");
+      td1.innerText = i + 1;
+
+      var td2 = document.createElement("td");
+      td2.classList.add("td-body");
+      td2.innerText = myList[i].username;
+
+      var td3 = document.createElement("td");
+      td3.classList.add("td-body");
+      td3.innerText = myList[i].earning_rate;
+
+      var td4 = document.createElement("td");
+      td4.classList.add("td-body");
+      td4.innerText = myList[i].deposit;
+
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tr.appendChild(td4);
+    }
+
+    var width = window.innerWidth * 0.5;
+    $(".td-body").css("width", width / 4);
+
+    return columnSet;
+  }
+</script>
+
 <div class="container">
-    <div>
-        <h1>Ranking</h1>
-    </div>
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <table class="table-head">
-                <tr class="tr-head">
-                    <td class="td-head">
-                        등수
-                    </td>
-                    <td class="td-head">
-                        닉네임
-                    </td>
-                    <td class="td-head">
-                        수익률
-                    </td>
-                    <td class="td-head">
-                        자산
-                    </td>
-                </tr>
-            </table>
-        </nav>
+  <div>
+    <h1>Ranking</h1>
+  </div>
+  <div id="ranking">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <table class="table-head">
+        <tr class="tr-head">
+          <td class="td-head">등수</td>
+          <td class="td-head">닉네임</td>
+          <td class="td-head">수익률</td>
+          <td class="td-head">자산</td>
+        </tr>
+      </table>
+    </nav>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <table id="table1"></table>
-        </nav>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            1
-        </nav>
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            2
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            3
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            4
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            5
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            6
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            7
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            8
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            9
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            10
-        </nav>
-    </div>
-
+  </div>
 </div>
 
 
-
 {% endblock %}
+
+
