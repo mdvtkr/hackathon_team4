@@ -1262,7 +1262,7 @@
     });
     $("#closeRoundBtn").bind("click", function(event, ui){
       var round = getCookie("round");
-      if(round==10){
+      if(Number(round) > Number(10)){
         $(location).attr('href','http://13.124.3.123:8080/ranking')
       }
     });
