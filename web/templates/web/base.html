@@ -1404,6 +1404,10 @@
       var width = "width: "+round+0+"%"
       $("#progressBar").attr("style",width);
       $("#currentRound").text("현재 라운드: "+round+"Round");
+    var getCookie = function(name) {
+      var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+      return value? value[2] : null;
+    };
       var userName = getCookie(userName);
       console.log(userName);
       json = $.ajax({
