@@ -1410,7 +1410,12 @@
       });
 
       console.log(curStock);
+      for(var i = 0; i<json.responseJSON.length; i++){
+      var curStock = json.responseJSON[i].current_price;
+      var code = json.responseJSON[i].stock_code;
 
+      $("#"+code+"").find('td.price').text(curStock);
+      }
       for(var i = 0; i<curStock.responseJSON.length; i++){
       var prePrice = curStock.responseJSON[i].previous_price;
       var curPrice = curStock.responseJSON[i].current_price;
