@@ -113,8 +113,9 @@ def refreshCurrentStock():
                 stock_user['previous_price'] = stock_db['current_price']
                 stock_user['future_price'] = stock_db['current_price']
                 res = requests.put(userUrl+'/'+stock_user['stock_code']+'/',data = stock_user)
-                ret.extend(res.json())
+                # ret.extend(res.json())
                 break
+    ret = updateCurrentStock()
     return ret
 
 def aggregateCurrentStock():
