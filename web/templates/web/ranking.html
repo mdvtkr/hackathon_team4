@@ -2,7 +2,127 @@
 
 {% load static  %}
 {% block content %}
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<script>
+  var width = window.innerWidth *0.5;
+  var height = window.innerHeight * 0.65;
+
+  $(document).ready(function () {
+        $(".container").css("height", height);
+        $(".container").css("width", width);
+        $(".td-head").css("width", width/4);
+        $(".td-body").css("width", width/4);
+      });
+</script>
+
+<style>
+    .navbar{
+        position: static;
+        margin: 0.5rem;
+    }
+
+    h1{
+        text-align: center;
+    }
+
+    .tr-head{
+        background-color: #555 !important;
+        position: relative;
+        text-align: center;
+    }
+
+    .table-head{
+        margin: auto;
+        text-align: center;
+        background-color: #555 !important;
+    }
+
+    .td-head{
+        background-color: #555 !important;
+        position: relative;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .tr-body{
+        position: relative;
+        text-align: center;
+    }
+
+    .table-body{
+        margin: auto;
+        text-align: center;
+    }
+
+    .td-body{
+        position: relative;
+        text-align: center;
+    }
+
+
+
+</style>
+
+<div class="container">
+    <div>
+        <h1>Ranking</h1>
+    </div>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <table class="table-head">
+            <tr class="tr-head">
+                <td class="td-head">
+                    등수
+                </td>
+                <td class="td-head">
+                    닉네임
+                </td>
+                <td class="td-head">
+                    수익률
+                </td>
+                <td class="td-head">
+                    자산
+                </td>
+            </tr>
+                </table>
+        </nav>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            1
+        </nav>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            2
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            3
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            4
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            5
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            6
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            7
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            8
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            9
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            10
+        </nav>
+    </div>
+
+</div>
+
 
 
 {% endblock %}
