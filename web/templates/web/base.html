@@ -1450,7 +1450,7 @@
       });
       $("#currentProfit").text("총 손익금액: ₩"+json.responseJSON.profit);
       $("#currentProfitRatio").text("수익률: "+json.responseJSON.profitRatio+"%");
-      $("#profitTable > tbody:last").append('<tr class="table-active"><th scope="row">'+round+'R</th><td>'+profit+'</td><td>'+profitRatio+'%</td></tr>');
+      $("#profitTable > tbody:last").append('<tr class="table-active"><th scope="row">'+round+'R</th><td>'+json.responseJSON.profit+'</td><td>'+json.responseJSON.profitRatio+'%</td></tr>');
       round *= 1;
       round += 1;
       setCookie("round",Number(round));
