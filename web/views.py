@@ -111,6 +111,7 @@ def refreshCurrentStock():
                 stock_user['stock_quantity'] = 0
                 stock_user['current_price'] = stock_db['current_price']
                 stock_user['previous_price'] = stock_db['current_price']
+                stock_user['future_price'] = stock_db['current_price']
                 res = requests.put(userUrl+'/'+stock_user['stock_code']+'/',data = stock_user)
                 ret.extend(res.json())
                 break
@@ -139,9 +140,11 @@ def updateCurrentStock():
 
     for stock in stockRes:
         key = 'rate_'+stock['stock_code']
-        stock['previous_price'] = stock['current_price']
+        cur = stock['current_price']
         stock['current_price'] = stock['future_price']
-        stock['future_price'] = stock['current_price']*(100+news[key])/100
+        stock['previous_price'] = cur
+        stock['future_price'] = int(cur*(100+news[key])/100)
+        res = requests.put(stockUrl + '/' + stock['stock_code'] + '/', data=stock)
     ret = {}
     ret['news_data'] = news['news_data']
     ret['stock_data'] = stockRes
