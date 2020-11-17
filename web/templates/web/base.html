@@ -1406,7 +1406,7 @@
       $("#currentRound").text("현재 라운드: "+round+"Round");
       var userName = getCookie(userName);
       json = $.ajax({
-        url : 'http://15.164.171.146:8080/api/v1/aggregate',
+        url : 'http://15.164.171.146:8080/api/v1/aggregate/',
         type : 'POST',
         dataType : 'json',
         async: false,
