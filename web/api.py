@@ -27,7 +27,7 @@ class NewsDataViewSet(viewsets.ModelViewSet):
 # current_stock
 class CurrentStockSerializer(serializers.ModelSerializer):
     class Meta:
-        model = currentStockPrice
+        model = currentStock
         fields = '__all__'
 
 class CurrentStockViewSet(viewsets.ModelViewSet):
