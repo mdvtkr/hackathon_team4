@@ -1405,11 +1405,19 @@
       $("#progressBar").attr("style",width);
       $("#currentRound").text("현재 라운드: "+round+"Round");
 
+      var userName = getCookie("userName");
+      console.log(userName);
       json = $.ajax({
         url : 'http://15.164.171.146:8080/api/v1/aggregate',
-        type : 'GET',
+        type : 'POST',
         dataType : 'json',
         async: false,
+        data : {
+            'username' : userName,
+        },
+        success: function(response){
+            console.log(response)
+        },
       });
       $("#currentProfit").text("총 손익금액: ₩"+json.responseJSON.profit);
       $("#currentProfitRatio").text("수익률: "+json.responseJSON.profitRatio+"%");
