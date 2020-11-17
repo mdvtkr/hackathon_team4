@@ -18,6 +18,7 @@ from .batch import *
 
 logger = logging.getLogger(__name__)
 # Create your views here.
+API_URL = "http://13.124.3.123:8080/api/v1/"
 def intro(request):
     if request.method == "GET":
         logger.debug("logger.debug", request.GET)
@@ -80,6 +81,10 @@ def userClear(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def currentStockRefresh(request):
     return JsonResponse(refreshCurrentStock(),safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def currentStockAggregate(request):
+    return JsonResponse(aggregateCurrentStock(),safe=False)
 
 
 # Server Logic
@@ -90,8 +95,8 @@ def currentStockClearDB():
 def userRankClearDB():
     return userRank.objects.all().delete()
 def refreshCurrentStock():
-    dbUrl = 'http://13.124.3.123:8080/api/v1/stock_price'
-    userUrl = 'http://13.124.3.123:8080/api/v1/current_stock'
+    dbUrl = API_URL+'stock_price'
+    userUrl = API_URL+'current_stock'
     res1 = requests.get(dbUrl)
     res2 = requests.get(userUrl)
     ret = []
@@ -104,9 +109,19 @@ def refreshCurrentStock():
                 ret.extend(res.json())
                 break
     return ret
+def aggregateCurrentStock():
+    url = API_URL+'current_stock'
+    userUrl = API_URL + 'user_rank'
+    res = requests.get(url)
+    sum = 0
+    for stock in res.json():
+        sum += stock['current_price'] * stock['stock_quantity']
+    userRes = requests.get(userUrl)
+    deposit = userRes.json()[-1]['deposit']
+    profit = sum + deposit - 1000000
+    profitRatio = (profit / 1000000)*100
+    return {"profit":profit, "profitRatio":profitRatio}
 
-
-    return res.json()
 # Koscom API
 def koscomStockList():
     codes = ['kospi','kosdaq']
