@@ -182,10 +182,11 @@ def koscomStockPriceList():
         res = requests.get(url, headers=headers)
         ret.append(res.json())
     return ret
-
 #
-def getRankingScoreBoard():
-    url = API_URL+'user_rank'
-    res = requests.get(url)
-
-    res.json
+# #
+# def getRankingScoreBoard():
+#     url = API_URL+'user_rank'
+#     res = requests.get(url)
+#
+#     res.json
+#

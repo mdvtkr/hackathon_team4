@@ -13,7 +13,75 @@
         $(".container").css("width", width);
         $(".td-head").css("width", width/4);
         $(".td-body").css("width", width/4);
+
+        getRanking();
       });
+
+  function getRanking(){
+    uri = 'http://15.164.171.146:8080/api/v1/user_rank/'
+    console.log("getRanking uri :", uri);
+
+    var json_data;
+
+    $.ajax({
+        type: 'GET',
+        url: uri,
+        async: false,
+        error: function(e) {
+          console.log(e);
+        },
+        success: function(data) {
+            json_data = data;
+        },
+        dataType: "json",
+        contentType: "application/json"
+    });
+
+    json_data.sort(function(a, b){
+        return b.earning_rate - a.earning_rate;
+    });
+
+    var table1 = $("#table1")
+
+    buildHtmlTable(table1, json_data);
+  }
+
+  // Builds the HTML Table out of myList.
+  function buildHtmlTable(selector, myList) {
+      var columns = addAllColumnHeaders(myList, selector);
+
+      for (var i = 0; i < myList.length; i++) {
+        var row$ = $('<tr/>');
+        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+          var cellValue = myList[i][columns[colIndex]];
+          if (cellValue == null) cellValue = "";
+          row$.append($('<td/>').html(cellValue));
+        }
+        $(selector).append(row$);
+      }
+  }
+
+  // Adds a header row to the table and returns the set of columns.
+  // Need to do union of keys from all records as some records may not contain
+  // all records.
+  function addAllColumnHeaders(myList, selector) {
+      var columnSet = [];
+      var headerTr$ = $('<tr/>');
+
+      for (var i = 0; i < myList.length; i++) {
+        var rowHash = myList[i];
+        for (var key in rowHash) {
+          if ($.inArray(key, columnSet) == -1) {
+            columnSet.push(key);
+            headerTr$.append($('<th/>').html(key));
+          }
+        }
+      }
+      $(selector).append(headerTr$);
+
+      return columnSet;
+  }
+
 </script>
 
 <style>
@@ -71,21 +139,25 @@
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <table class="table-head">
-            <tr class="tr-head">
-                <td class="td-head">
-                    등수
-                </td>
-                <td class="td-head">
-                    닉네임
-                </td>
-                <td class="td-head">
-                    수익률
-                </td>
-                <td class="td-head">
-                    자산
-                </td>
-            </tr>
-                </table>
+                <tr class="tr-head">
+                    <td class="td-head">
+                        등수
+                    </td>
+                    <td class="td-head">
+                        닉네임
+                    </td>
+                    <td class="td-head">
+                        수익률
+                    </td>
+                    <td class="td-head">
+                        자산
+                    </td>
+                </tr>
+            </table>
+        </nav>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <table id="table1"></table>
         </nav>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
