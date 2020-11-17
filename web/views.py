@@ -105,6 +105,7 @@ def refreshCurrentStock():
             if stock_db.get('stock_code') == stock_user.get('stock_code'):
                 stock_user['stock_quantity'] = 0
                 stock_user['current_price'] = stock_db['current_price']
+                stock_user['previous_price'] = stock_db['current_price']
                 res = requests.put(userUrl+'/'+stock_user['stock_code']+'/',data = stock_user)
                 ret.extend(res.json())
                 break
@@ -123,6 +124,10 @@ def aggregateCurrentStock():
     profitRatio = (profit / 1000000)*100
     return {"profit":profit, "profitRatio":profitRatio}
 
+def updateCurrentStock():
+    stockUrl = API_URL+'current_stock'
+    newsUrl = API_URL+''
+    res = requests.get(stockUrl)
 
 
 # Koscom API
