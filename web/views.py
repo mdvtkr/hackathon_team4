@@ -69,6 +69,10 @@ def tradingLogClear(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def currentStockClear(request):
     return JsonResponse(currentStockClearDB(),safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def userClear(request):
+    return JsonResponse(userRankClearDB(),safe=False)
 
 
 # Server Logic
@@ -76,6 +80,8 @@ def tradingLogClearDB():
     return tradingLog.objects.all().delete()
 def currentStockClearDB():
     return currentStock.objects.all().delete()
+def userRankClearDB():
+    return userRank.objects.all().delete()
 
 # Koscom API
 def koscomStockList():
