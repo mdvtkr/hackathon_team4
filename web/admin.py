@@ -40,9 +40,9 @@ class CurrentStock(admin.ModelAdmin):
     list_display = (
         'stock_code',
         'stock_quantity',
-        'average_price',
+        'future_price',
         'current_price',
-        'earning_rate'
+        'previous_price'
     )
 
 @admin.register(models.userRank)

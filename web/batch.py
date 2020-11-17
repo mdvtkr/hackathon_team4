@@ -30,7 +30,7 @@ def currentStockBatch():
             if n.get('stock_code') == stockCode:
                 stockName = n.get('stock_name')
                 break
-        data = {'stock_code': stockCode, 'current_price': stockPrice, 'stock_name': stockName}
+        data = {'stock_code': stockCode, 'current_price': stockPrice,'previous_price':stockPrice, 'stock_name': stockName}
         headers = {'Content-Type': 'application/json'}
         res = requests.put(url=postUrl+data['stock_code']+'/', data=json.dumps(data), headers=headers)
         ret2.append(res.json())

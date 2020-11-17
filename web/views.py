@@ -9,6 +9,7 @@ from rest_framework.decorators import renderer_classes, api_view
 from rest_framework_swagger import renderers
 from rest_framework.response import Response
 from django.shortcuts import render, redirect, get_object_or_404
+from random import randint
 
 
 import requests
@@ -85,6 +86,10 @@ def currentStockRefresh(request):
 @renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
 def currentStockAggregate(request):
     return JsonResponse(aggregateCurrentStock(),safe=False)
+@api_view(['GET'])
+@renderer_classes([renderers.OpenAPIRenderer, renderers.SwaggerUIRenderer])
+def updateCurrentStockAPI(request):
+    return JsonResponse(updateCurrentStock(),safe=False)
 
 
 # Server Logic
@@ -105,9 +110,12 @@ def refreshCurrentStock():
             if stock_db.get('stock_code') == stock_user.get('stock_code'):
                 stock_user['stock_quantity'] = 0
                 stock_user['current_price'] = stock_db['current_price']
+                stock_user['previous_price'] = stock_db['current_price']
+                stock_user['future_price'] = stock_db['current_price']
                 res = requests.put(userUrl+'/'+stock_user['stock_code']+'/',data = stock_user)
-                ret.extend(res.json())
+                # ret.extend(res.json())
                 break
+    ret = updateCurrentStock()
     return ret
 
 def aggregateCurrentStock():
@@ -123,7 +131,25 @@ def aggregateCurrentStock():
     profitRatio = (profit / 1000000)*100
     return {"profit":profit, "profitRatio":profitRatio}
 
+def updateCurrentStock():
+    stockUrl = API_URL+'current_stock'
+    newsUrl = API_URL+'news_data'
+    stockRes = requests.get(stockUrl).json()
+    newsRes = requests.get(newsUrl).json()
+    idx = randint(0,len(newsRes)-1)
+    news = newsRes[idx]
 
+    for stock in stockRes:
+        key = 'rate_'+stock['stock_code']
+        cur = stock['current_price']
+        stock['current_price'] = stock['future_price']
+        stock['previous_price'] = cur
+        stock['future_price'] = int(cur*(100+news[key])/100)
+        res = requests.put(stockUrl + '/' + stock['stock_code'] + '/', data=stock)
+    ret = {}
+    ret['news_data'] = news['news_data']
+    ret['stock_data'] = stockRes
+    return ret
 
 # Koscom API
 def koscomStockList():

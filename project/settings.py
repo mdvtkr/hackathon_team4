@@ -26,10 +26,8 @@ SECRET_KEY = '27idv58)ov=n=w3rd680zu(vl_d!=acg70&k%lp2_50t(-hdeu'
 DEBUG = True
 
 # <<<<<<< Updated upstream
-ALLOWED_HOSTS = ['13.124.3.123', '127.0.0.1', 'localhost']
-# =======
-ALLOWED_HOSTS = ['13.124.3.123','127.0.0.1', 'localhost']
-# >>>>>>> Stashed changes
+ALLOWED_HOSTS = ['13.124.3.123', '15.164.171.146','127.0.0.1', 'localhost']
+
 
 
 # Application definition
