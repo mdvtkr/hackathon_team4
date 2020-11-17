@@ -1392,6 +1392,14 @@
       round *= 1;
       round += 1;
       setCookie("round",Number(round));
+
+      newsData = $.ajax({
+        url : 'http://15.164.171.146:8080/api/v1/current_news_update',
+        type : 'GET',
+        dataType : 'json',
+        async: false,
+      });
+      $("#newsPanel").text("오늘의 뉴스: "+newsData.responseJSON.news_data);
     });
     $("#closeRoundBtn").bind("click", function(event, ui){
       var round = getCookie("round");
