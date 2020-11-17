@@ -109,6 +109,7 @@ def refreshCurrentStock():
                 ret.extend(res.json())
                 break
     return ret
+
 def aggregateCurrentStock():
     url = API_URL+'current_stock'
     userUrl = API_URL + 'user_rank'
@@ -121,6 +122,8 @@ def aggregateCurrentStock():
     profit = sum + deposit - 1000000
     profitRatio = (profit / 1000000)*100
     return {"profit":profit, "profitRatio":profitRatio}
+
+
 
 # Koscom API
 def koscomStockList():

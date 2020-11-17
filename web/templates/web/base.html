@@ -1104,10 +1104,8 @@
                   data-toggle="modal"
                   href="#aggregateModal"
                   role="button"
-                  id="nextRoundBtn"
-<!--                  onclick="nextRound();"-->
-                  >Next Round</a
-                >
+                  id="nextRoundBtn">
+                  Next Round</a>
               </div>
             </div>
           </div>
@@ -1132,8 +1130,8 @@
           </div>
           <div class="modal-body">
             <p id="currentRound">현재 라운드: 1Round</p>
-            <p>총 손익금액: ₩164,433,432</p>
-            <p>수익률: 1212%</p>
+            <p id="currentProfit">총 손익금액: ₩164,433,432</p>
+            <p id="currentProfitRatio">수익률: 1212%</p>
           </div>
           <div class="modal-footer">
             <button
@@ -1256,6 +1254,16 @@
       var width = "width: "+round+0+"%"
       $("#progressBar").attr("style",width);
       $("#currentRound").text("현재 라운드: "+round+"Round");
+
+      json = $.ajax({
+        url : 'http://13.124.3.123:8080/api/v1/aggregate',
+        type : 'GET',
+        dataType : 'json',
+        async: false,
+      });
+      $("#currentProfit").text("총 손익금액: ₩"+json.responseJSON.profit);
+      $("#currentProfitRatio").text("수익률: "+json.responseJSON.profitRatio+"%");
+
       round *= 1;
       round += 1;
       setCookie("round",Number(round));
