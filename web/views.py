@@ -18,7 +18,7 @@ from .batch import *
 
 logger = logging.getLogger(__name__)
 # Create your views here.
-API_URL = "http://13.124.3.123:8080/api/v1/"
+API_URL = "http://15.164.171.146:8080/api/v1/"
 def intro(request):
     if request.method == "GET":
         logger.debug("logger.debug", request.GET)
@@ -126,7 +126,7 @@ def aggregateCurrentStock():
 
 def updateCurrentStock():
     stockUrl = API_URL+'current_stock'
-    newsUrl = API_URL+''
+    newsUrl = API_URL+'news_data'
     res = requests.get(stockUrl)
 
 

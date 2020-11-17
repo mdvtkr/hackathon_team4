@@ -317,7 +317,7 @@
     $(function () {
         "use strict";
         $("#grid").jqGrid({
-                url: 'http://13.124.3.123:8080/api/v1/current_stock/',
+                url: 'http://15.164.171.146:8080/api/v1/current_stock/',
                 mtype: "GET",
                 datatype: "json",
                 colModel: [
@@ -1147,7 +1147,7 @@
       var userName = getCookie("userName");
       var curRound = getCookie("round");
       userInfo = $.ajax({
-        url : 'http://13.124.3.123:8080/api/v1/user_rank/'+userName,
+        url : 'http://15.164.171.146:8080/api/v1/user_rank/'+userName,
         type :  'GET',
         dataType : 'json',
         async: false,
@@ -1163,7 +1163,7 @@
 
 
         json = $.ajax({
-        url : 'http://13.124.3.123:8080/api/v1/stock_price/',
+        url : 'http://15.164.171.146:8080/api/v1/stock_price/',
         type : 'GET',
         dataType : 'json',
         async: false,
@@ -1191,7 +1191,7 @@
         "earning_rate": 0
       }
 
-      uri = 'http://13.124.3.123:8080/api/v1/current_stock/'+ stock_code +'/'
+      uri = 'http://15.164.171.146:8080/api/v1/current_stock/'+ stock_code +'/'
       console.log("putCurrentStock uri :", uri);
 
       json = $.ajax({
@@ -1219,7 +1219,7 @@
         "current_price": current_price
       }
 
-      uri = 'http://13.124.3.123:8080/api/v1/current_stock/'+ stock_code +'/'
+      uri = 'http://15.164.171.146:8080/api/v1/current_stock/'+ stock_code +'/'
       console.log("patchCurrentStock uri :", uri);
 
       json = $.ajax({
@@ -1241,7 +1241,7 @@
     function getCurrentStock(stock_code)
     {
       var result = false;
-      uri = 'http://13.124.3.123:8080/api/v1/current_stock/'+ stock_code +'/'
+      uri = 'http://15.164.171.146:8080/api/v1/current_stock/'+ stock_code +'/'
       console.log("getCurrentStock uri :", uri);
 
       json = $.ajax({
@@ -1360,7 +1360,7 @@
       $("#currentRound").text("현재 라운드: "+round+"Round");
 
       json = $.ajax({
-        url : 'http://13.124.3.123:8080/api/v1/aggregate',
+        url : 'http://15.164.171.146:8080/api/v1/aggregate',
         type : 'GET',
         dataType : 'json',
         async: false,
@@ -1375,7 +1375,7 @@
     $("#closeRoundBtn").bind("click", function(event, ui){
       var round = getCookie("round");
       if(Number(round) > Number(10)){
-        $(location).attr('href','http://13.124.3.123:8080/ranking')
+        $(location).attr('href','http://15.164.171.146:8080/ranking')
       }
     });
     </script>
