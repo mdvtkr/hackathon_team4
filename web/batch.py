@@ -35,4 +35,4 @@ def currentStockBatch():
         res = requests.put(url=postUrl+data['stock_code']+'/', data=json.dumps(data), headers=headers)
         ret2.append(res.json())
     return ret2
-currentStockBatch()
+# currentStockBatch()
