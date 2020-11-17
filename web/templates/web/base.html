@@ -395,7 +395,7 @@
           </div>
 
           <div class="col-md-6 col-sm-6 col-lg-6 box">
-            <div class="jumbotron">오늘의 뉴스</div>
+            <div class="jumbotron" id="newsPanel">오늘의 뉴스</div>
             <div class="padding2"></div>
 
             <div class="card-section">
@@ -1144,13 +1144,14 @@
     $(document).ready(function(){
       var userName = getCookie("userName");
       var curRound = getCookie("round");
+      var newsData = getCookie("currentNews");
       userInfo = $.ajax({
         url : 'http://15.164.171.146:8080/api/v1/user_rank/'+userName,
         type :  'GET',
         dataType : 'json',
         async: false,
       });
-
+      $("#newsPanel").text("오늘의 뉴스  "+newsData);
       $("#userName").text(userName);
       $("#balance").text(userInfo.responseJSON.deposit);
       var width = "width: "+curRound+0+"%"
