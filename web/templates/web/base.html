@@ -21,6 +21,19 @@
         $(".panel1-box").css("height", height4);
         $(".panel1-box").css("width", "auto");
       });
+<!-- User Name Cookie-->
+      var getCookie = function(name) {
+        var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return value? value[2] : null;
+      };
+
+      var userName = getCookie("userName");
+
+      $("#"+userName+"").text(userName);
+      console.log($("#"+userName+"").text);
+
+
+
     </script>
 
     <style>
@@ -314,7 +327,7 @@
                         <figure class="profile">
                             <img src="https://i.pinimg.com/originals/5a/78/a8/5a78a8c0259059d0043669a4cda7445a.gif" class="profile-avatar" alt="">
                         </figure>
-                        <h4 class="card-title mt-3">이름</h4>
+                        <h4 class="card-title mt-3" id="userName">이름</h4>
                       </div>
                       <div class="secondo">
                         <div class="meta">
@@ -329,7 +342,7 @@
                         </div>
                       </div>
                         <div class="card-text" >
-                            <label id="balance"> 10000</label>
+                            <label id="balance"></label>
                             <label> 원</label>
                         </div>
                       </div>
@@ -1156,6 +1169,26 @@
     <script>
 
     $(document).ready(function(){
+              var getCookie = function(name) {
+        var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return value? value[2] : null;
+      };
+
+      var userName = getCookie("userName");
+      userInfo = $.ajax({
+        url : 'http://localhost:8000/api/v1/user_rank/'+userName,
+        type :  'GET',
+        dataType : 'json',
+        async: false,
+      });
+
+      $("#userName").text(userName);
+      $("#balance").text(userInfo.responseJSON.deposit);
+      console.log($("#userName").text);
+      console.log(userName);
+      console.log(userInfo);
+
+
         json = $.ajax({
         url : 'http://13.124.3.123:8080/api/v1/stock_price/',
         type : 'GET',
@@ -1163,16 +1196,12 @@
         async: false,
         }); 
 
-        console.log(json);
 
         for(var i = 0; i<json.responseJSON.length; i++){
-        var curStork = json.responseJSON[i].current_price;
+        var curStock = json.responseJSON[i].current_price;
         var code = json.responseJSON[i].stock_code;
-        console.log(curStork);
-        console.log("#"+code+"");
 
-        $("#"+code+"").find('td.price').text(curStork);
-        console.log($("#"+code+"").find('td.price').text);
+        $("#"+code+"").find('td.price').text(curStock);
         }
     });
 
@@ -1224,6 +1253,8 @@
         console.log("DB API이용해서 팔 수 있는 갯수만큼 내가 현재 주식을 보유중인지 체크한 후 파는 경우 처리 구현 필요");
       }
     }
+
+
 
 
     </script>
