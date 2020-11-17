@@ -1,6 +1,9 @@
 from .models import *
 from rest_framework import serializers, viewsets
-
+from rest_framework import status
+from rest_framework.response import Response
+import logging
+logger = logging.getLogger(__name__)
 # stock_price
 class CurrentStockPriceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,6 +43,14 @@ class UserRankSerializer(serializers.ModelSerializer):
 class UserRankViewSet(viewsets.ModelViewSet):
     queryset = userRank.objects.all()
     serializer_class = UserRankSerializer
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        res = Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        print(res.data)
+        return res
 
 # trading_log
 class TradingLogSerializer(serializers.ModelSerializer):

@@ -13,20 +13,32 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 import requests
 import datetime
+import logging
 from .batch import *
 
+logger = logging.getLogger(__name__)
 # Create your views here.
 def intro(request):
-    return render(request, 'web/intro.html')
-    if request.method == "POST":
+    if request.method == "GET":
+        logger.debug("logger.debug", request.GET)
+        logger.info("logger.info", request.POST)
+        logger.debug('request POST AJAX')
         print("request POST AJAX")
         print(request.POST)
+    return render(request, 'web/intro.html')
+
 
 
 def test(request):
     return render(request, 'web/test.html')
 
 def base(request):
+    if request.method == "POST":
+        logger.debug(request.POST)
+        logger.info(request.POST)
+        logger.debug('request POST AJAX')
+        print("request POST AJAX")
+        print(request.POST)
     return render(request, 'web/base.html')
 
 def baseNext(request, pk):

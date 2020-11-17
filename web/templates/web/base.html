@@ -1153,6 +1153,7 @@
     </div>
 
     <script>
+<<<<<<< Updated upstream
 
     $(document).ready(function(){
         json = $.ajax({
@@ -1174,6 +1175,18 @@
         console.log($("#"+code+"").find('td.price').text);
         }
     });
+=======
+      var json = $.ajax({
+        async: true,
+		url : 'http://13.124.3.123:8080/api/v1/stock_price/',
+		type : 'GET',
+		dataType : 'json',
+
+      });
+      jQuery(function($){
+	    console.log(json);
+      });
+>>>>>>> Stashed changes
 
 
     </script>

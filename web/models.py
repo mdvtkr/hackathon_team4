@@ -40,6 +40,7 @@ class currentStock(models.Model):
 class userRank(models.Model):
     id = models.AutoField(primary_key=True)
     username = models.CharField(max_length = 30)
+    deposit = models.IntegerField(default=1000000)
     earning_rate = models.IntegerField()
     # date = models.DateTimeField(auto_now_add=True)
 

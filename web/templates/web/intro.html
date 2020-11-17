@@ -72,12 +72,15 @@
 <!--        alert(valueById);-->
 
         $.ajax({
-		url : 'http://13.124.3.123:8080/api/v1/user_rank/',
+		url : 'http://localhost:8000/api/v1/user_rank/',
 		type : 'POST',
 		dataType : 'json',
 		data : {
 		    'username' : valueById,
 		    'earning_rate' : 0,
+		},
+		success: function(response){
+		    console.log(response)
 		},
 
     });
