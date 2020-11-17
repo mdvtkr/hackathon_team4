@@ -287,7 +287,33 @@
 
 
     </style>
-  </head>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Your page title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="${ctx }/resource/js/jqgrid/css/ui.jqgrid.css"/>
+    <script type="text/javascript" src="<c:url value='/resource/js/jqgrid/js/jquery.jqGrid.min.js'/>"></script>
+    <script>
+    $(function () {
+        "use strict";
+        $("#grid").jqGrid({
+                url: 'http://13.124.3.123:8080/api/v1/current_stock/',
+                mtype: "GET",
+                datatype: "json",
+                colModel: [
+                    { label: '주식명', name: 'stock_name', width: 100 },
+                    { label: '보유수', name: 'stock_quantity', width: 100 },
+                    { label: '평가금액', name: 'current_price', width: 200 },
+                ]
+            }).trigger('reloadGrid');
+    });
+    </script>
+</head>
   <body>
     <div class="padding"></div>
 
@@ -329,7 +355,7 @@
                         </div>
                       </div>
                         <div class="card-text" >
-                            <label id="balance"> 10000</label>
+                            <label id="balance"> 1000000</label>
                             <label> 원</label>
                         </div>
                       </div>
@@ -341,47 +367,7 @@
                           <!--                      <h3 class="display-5">Trading Log</h3>-->
                           <h4>자산현황</h4>
                           <!--                      <p class="lead">Log를 여기에 쌓겠습니다....</p>-->
-                          <table class="table table-hover">
-                            <thead>
-                              <tr>
-                                <th scope="col">주식명</th>
-                                <th scope="col">보유수</th>
-                                <th scope="col">평가금액</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr class="table-active">
-                                <td>SAMSUNG</td>
-                                <td>10</td>
-                                <td>0</td>
-                              </tr>
-                              <tr class="table-active">
-                                <td>Celltrion</td>
-                                <td>0</td>
-                                <td>4</td>
-                              </tr>
-                              <tr class="table-active">
-                                <td>SAMSUNG</td>
-                                <td>10</td>
-                                <td>0</td>
-                              </tr>
-                              <tr class="table-active">
-                                <td>Celltrion</td>
-                                <td>0</td>
-                                <td>4</td>
-                              </tr>
-                              <tr class="table-active">
-                                <td>SAMSUNG</td>
-                                <td>10</td>
-                                <td>0</td>
-                              </tr>
-                              <tr class="table-active">
-                                <td>Celltrion</td>
-                                <td>0</td>
-                                <td>4</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                          <table id="grid" class="table table-hover"></table>
                           <hr class="my-4" />
                           <p></p>
                         </div>
@@ -1174,25 +1160,126 @@
         $("#"+code+"").find('td.price').text(curStork);
         console.log($("#"+code+"").find('td.price').text);
         }
+
     });
+
+    function putCurrentStock(stock_code, stock_name, stock_quantity, current_price)
+    {
+      put_data = {
+        "stock_code": stock_code,
+        "stock_name": stock_name.toString(),
+        "stock_quantity": stock_quantity,
+        "average_price": 0,
+        "current_price": current_price,
+        "previous_price": 0,
+        "earning_rate": 0
+      }
+
+      uri = 'http://13.124.3.123:8080/api/v1/current_stock/'+ stock_code +'/'
+      console.log("putCurrentStock uri :", uri);
+
+      json = $.ajax({
+            type: 'PUT',
+            url: uri,
+            data: JSON.stringify(put_data),
+            error: function(e) {
+              console.log(e);
+            },
+            success: function(json) {
+              /* $("#grid").clearGridData(); */
+              $("#grid").trigger("reloadGrid");
+            },
+            dataType: "json",
+            contentType: "application/json"
+        });
+    }
+
+    function patchCurrentStock(stock_code, stock_name, stock_quantity, current_price)
+    {
+      put_data = {
+        "stock_code": stock_code,
+        "stock_name": stock_name.toString(),
+        "stock_quantity": stock_quantity,
+        "current_price": current_price
+      }
+
+      uri = 'http://13.124.3.123:8080/api/v1/current_stock/'+ stock_code +'/'
+      console.log("patchCurrentStock uri :", uri);
+
+      json = $.ajax({
+            type: 'PATCH',
+            url: uri,
+            data: JSON.stringify(put_data),
+            error: function(e) {
+              console.log(e);
+            },
+            success: function(json) {
+              /* $("#grid").clearGridData(); */
+              $("#grid").trigger("reloadGrid");
+            },
+            dataType: "json",
+            contentType: "application/json"
+        });
+    }
+
+    function getCurrentStock(stock_code)
+    {
+      var result = false;
+      uri = 'http://13.124.3.123:8080/api/v1/current_stock/'+ stock_code +'/'
+      console.log("getCurrentStock uri :", uri);
+
+      json = $.ajax({
+            type: 'GET',
+            url: uri,
+            async: false,
+            error: function(e) {
+              console.log(e);
+            },
+            dataType: "json",
+            contentType: "application/json"
+      });
+
+      return json;
+    }
 
 
     function buy(row, item) {
       /* row: row number 1 => 30 */
       /* item: stock id */
+      var stock_code = row[1]+item;
+
 
       var path = "#\\"+ row +" "+ item +" > table > tbody > tr:nth-child(1) > td:nth-child(2)"
+      console.log('path: ', path);
       var price = document.querySelector(path).textContent
+      console.log('price: ', price);
+      var stock_name = document.querySelector("#\\"+ row +" "+ item +" > h6").textContent
 
       var count = document.querySelector("#\\"+ row +" "+ item +" > table > tbody > tr:nth-child(3) > td:nth-child(1) > div > input").value
       setPrice = price * count;
+      console.log('price: ', price, 'count: ', count, 'Total: ', setPrice);
 
       if(!flashInSufficientBalance(setPrice)){
         /*buy*/
-        stockId = row[1] + item;
-
-        console.log("I will buy" + stockId + " money: " + setPrice);
+        console.log("I will buy " + stock_code + " money: " + setPrice);
         console.log("DB API에 사는 경우 처리 구현 필요");
+        /* 구매 */
+
+        currentBalance = $("#balance").text()
+
+        result = getCurrentStock(stock_code);
+        currentCount = result.responseJSON["stock_quantity"];
+
+        stock_quantity_to_update = parseInt(currentCount, 10) + parseInt(count, 10);
+
+        patchCurrentStock(stock_code, stock_name, stock_quantity_to_update, price)
+        currentBalance = currentBalance - setPrice;
+
+        $("#balance").text(currentBalance);
+
+        /* 구매 후 Panel 1의 table grid를 DB 값으로 전체 갱신 */
+
+
       }
     }
 
@@ -1212,19 +1299,37 @@
 
       var path = "#\\"+ row +" "+ item +" > table > tbody > tr:nth-child(1) > td:nth-child(2)"
       var price = document.querySelector(path).textContent
-
+      var stock_name = document.querySelector("#\\"+ row +" "+ item +" > h6").textContent
       var count = document.querySelector("#\\"+ row +" "+ item +" > table > tbody > tr:nth-child(3) > td:nth-child(1) > div > input").value
       setPrice = price * count;
 
-      if(!flashInSufficientBalance(setPrice)){
-        /*buy*/
-        stockId = row[1] + item;
+      /*sell*/
+      stock_code = row[1] + item;
 
-        console.log("I will sell" + stockId + " money: " + setPrice);
-        console.log("DB API이용해서 팔 수 있는 갯수만큼 내가 현재 주식을 보유중인지 체크한 후 파는 경우 처리 구현 필요");
+      console.log("sell: " + stock_code + " money: " + setPrice);
+      console.log("DB API이용해서 팔 수 있는 갯수만큼 내가 현재 주식을 보유중인지 체크한 후 파는 경우 처리 구현 필요");
+      /* 판매 */
+
+      currentBalance = $("#balance").text()
+
+      result = getCurrentStock(stock_code);
+      currentCount = result.responseJSON["stock_quantity"];
+
+      stock_quantity_to_update = parseInt(currentCount, 10) - parseInt(count, 10);
+
+      if(stock_quantity_to_update>=0){
+        patchCurrentStock(stock_code, stock_name, stock_quantity_to_update, price)
+        currentBalance = parseInt(currentBalance, 10) + parseInt(setPrice, 10);
+
+        $("#balance").text(currentBalance);
+
+        /* 판매 후 Panel 1의 table grid를 DB 값으로 전체 갱신 */
+      } else {
+        alert("판매 하려는 주식 수량이 보유 수량보다 많습니다.");
       }
     }
 
 
     </script>
+
 {% endblock %}
