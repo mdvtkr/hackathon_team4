@@ -307,8 +307,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Your page title</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
     <script>
@@ -339,8 +337,9 @@
                   <div class="jumbotronlong">
                   <div id="btn_group">
                     <div class = "hcenter">
-                      <button id="btn_home" class="btn btn-secondary btn-sm">Home</button>
-                      <button id="btn_exit" class="btn btn-secondary btn-sm">Exit</button>
+                      <a href="../intro">
+                        <button id="btn_home" class="btn btn-secondary btn-sm">Home</button>
+                      </a>
                     </div>
                   </div>
                   </div>
@@ -999,20 +998,7 @@
                       <th scope="col">Sale</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr class="table-active">
-<!--                      <th scope="row">1R</th>-->
-                      <td>SAMSUNG</td>
-                      <td>10</td>
-                      <td>0</td>
-                    </tr>
-                    <tr class="table-active">
-<!--                      <th scope="row">1R</th>-->
-                      <td>Celltrion</td>
-                      <td>0</td>
-                      <td>4</td>
-                    </tr>
-
+                  <tbody id="table-body">
                   </tbody>
                 </table>
                 <hr class="my-4" />
@@ -1321,6 +1307,27 @@
         patchDeposit(username, currentBalance);
 
       }
+
+      var tbody = document.getElementById('table-body');
+      var tr1 = document.createElement('tr');
+      tr1.classList.add('table-active');
+      tbody.appendChild(tr1);
+
+      var td1 = document.createElement('td');
+      td1.innerText = stock_name;
+
+      var td2 = document.createElement('td');
+      td2.innerText = count;
+
+      var td3 = document.createElement('td');
+      td3.innerText = '0';
+
+      tr1.appendChild(td1);
+      tr1.appendChild(td2);
+      tr1.appendChild(td3);
+
+
+
     }
 
     function flashInSufficientBalance(setPrice) {
@@ -1371,6 +1378,24 @@
       }
 
       //sell buy 할 때, DB에 PUT
+
+      var tbody = document.getElementById('table-body');
+      var tr1 = document.createElement('tr');
+      tr1.classList.add('table-active');
+      tbody.appendChild(tr1);
+
+      var td1 = document.createElement('td');
+      td1.innerText = stock_name;
+
+      var td2 = document.createElement('td');
+      td2.innerText = '0';
+
+      var td3 = document.createElement('td');
+      td3.innerText = count;
+
+      tr1.appendChild(td1);
+      tr1.appendChild(td2);
+      tr1.appendChild(td3);
     }
 
 
