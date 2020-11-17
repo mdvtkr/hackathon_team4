@@ -1400,16 +1400,12 @@
 
 
     $("#nextRoundBtn").bind("click", function(event, ui){
-        var getCookie = function(name) {
-      var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-      return value? value[2] : null;
-    };
       var round = getCookie("round");
       var width = "width: "+round+0+"%"
       $("#progressBar").attr("style",width);
       $("#currentRound").text("현재 라운드: "+round+"Round");
 
-      var userName = getCookie(userName);
+      var userName = getCookie("userName");
       console.log(userName);
       json = $.ajax({
         url : 'http://15.164.171.146:8080/api/v1/aggregate',
